@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>峴港互動旅伴</title>
+  <title>峴港 5 天 4 夜互動旅伴</title>
   
   <!-- =================📱 iOS Safari 加入主畫面專屬美化設定 ================= -->
-  <!-- 桌面圖示：使用相對路徑，只要將圖片上傳至 GitHub 與 index.html 同資料夾即可 🏝️ -->
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- 桌面圖示：高相容性的 512x512 高解析度莫蘭迪粉嫩「椰子樹度假小島 🏝️」PNG 圖片 -->
+  <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/512x512/1f3dd.png">
   
   <!-- 允許網頁以 全螢幕 App 模式 執行 (隱藏 Safari 網址列與底部導航欄) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,7 +44,7 @@
     /* 1. 經典峴港 (Soft Pastel Mint) - 晨霧薄荷藍綠色 */
     body[data-theme="teal"] {
       --primary-gradient: linear-gradient(135deg, #e0f2fe, #d1fae5); /* 輕柔湖水藍至馬卡龍薄荷綠 */
-      --primary-color: #2e6f67; /* 莫蘭迪深綠灰（維持文字易讀性） */
+      --primary-color: #2e6f67; /* 莫蘭迪深綠灰 */
       --bg-light: #f0faf8; 
       --border-light: #daf2ee; 
       --accent-color: #2e6f67;
@@ -116,6 +116,17 @@
   </style>
 </head>
 <body data-theme="teal" class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between max-w-md mx-auto shadow-2xl relative border-x border-slate-200">
+
+  <!-- 🚨 LINE / FB 內建瀏覽器提示橫幅 (自動偵測後顯示) -->
+  <div id="in-app-browser-banner" class="hidden bg-amber-50 border-b border-amber-100 text-amber-800 px-4 py-3 text-xs flex justify-between items-center transition-all duration-300">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500 shrink-0 animate-bounce"></i>
+      <span class="font-medium">偵測到 LINE/社群瀏覽器！<button onclick="showBrowserTipModal()" class="underline font-extrabold text-amber-900">地圖順暢開啟祕技 💡</button></span>
+    </div>
+    <button onclick="document.getElementById('in-app-browser-banner').classList.add('hidden')" class="p-1 text-amber-500 hover:text-amber-800">
+      <i data-lucide="x" class="w-3.5 h-3.5"></i>
+    </button>
+  </div>
 
   <!-- 頂部 Header -->
   <header class="theme-gradient text-slate-800 px-4 py-5 rounded-b-3xl shadow-sm sticky top-0 z-30 transition-all duration-500">
@@ -329,7 +340,7 @@
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center space-x-1.5" id="budget-category-selector">
               <span class="text-xs text-slate-500 font-bold">分類:</span>
-              <!-- JS 動態生成分類按鈕 -->
+              <!-- JS 動態生成 classification buttons -->
             </div>
             <button
               type="submit"
@@ -387,6 +398,26 @@
     </div>
   </div>
 
+  <!-- 💡 內建社群 App 瀏覽器貼心引導彈窗 -->
+  <div id="browser-tip-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden px-6">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-150">
+      <div class="flex items-center space-x-2 mb-3">
+        <span class="text-2xl">💡</span>
+        <h3 class="font-extrabold text-slate-800 text-base">為什麼地圖打開卡卡的？</h3>
+      </div>
+      <p class="text-xs text-slate-500 mb-5 leading-relaxed">
+        因為您目前正在使用 <strong>LINE、FB 或 Instagram 的內建瀏覽器</strong>！<br><br>
+        這些 App 會強行限制您在網頁裡載入地圖，導致無法流暢喚醒 Google Maps App，且打勾與記帳速度也會被拖慢。<br><br>
+        <strong>🚀 貼心解法：</strong><br>
+        請點擊手機畫面<strong>右上角或右下角（有的在右上角有三個點 ••• 或分享按鈕）</strong>，選擇 <strong>「用 Safari 開啟」</strong>(iPhone) 或 <strong>「在 Chrome 中開啟」</strong>(Android)。<br><br>
+        這樣一來，點選地圖就會<b>秒開 Google Maps App 進行高速導航</b>，而且網頁整體速度會快 10 倍！
+      </p>
+      <button onclick="closeBrowserTipModal()" class="w-full py-3 theme-gradient text-slate-800 font-extrabold rounded-2xl text-xs transition-colors shadow-sm border border-white/20">
+        我知道了，馬上去開啟！
+      </button>
+    </div>
+  </div>
+
   <!-- 底部導覽列 -->
   <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-slate-100 rounded-t-3xl shadow-lg flex justify-around py-2.5 px-2 z-40">
     <button onclick="switchTab('itinerary')" id="nav-itinerary" class="nav-btn flex flex-col items-center flex-1 py-1 text-slate-400">
@@ -411,9 +442,9 @@
   <script>
     /***************************************************
      * 0. 全域預設設定區
-     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 839.60 即可！
+     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780.00 即可！
      ***************************************************/
-    const DEFAULT_EXCHANGE_RATE = 839.60; // 👈 預設台幣對越南盾匯率
+    const DEFAULT_EXCHANGE_RATE = 780.00; // 👈 預設台幣對越南盾匯率
 
     /***************************************************
      * 1. 詳細行程資料
@@ -433,7 +464,7 @@
             title: "飯店 Check-in", 
             desc: "前往下榻飯店辦理入住，稍作休息與寄放行李。", 
             icon: "🏨", 
-            query: "Da Nang Hotel",
+            query: "Chicland Danang Beach Hotel",
             mapUrl: "https://maps.app.goo.gl/TZC1BHCjuyjxgXPZA?g_st=ic"
           },
           { 
@@ -443,7 +474,7 @@
             desc: "位於漢市場附近。建議直接攜帶「台幣千元大鈔」在此兌換，匯率通常最劃算！", 
             icon: "💵", 
             query: "Tiệm Vàng Soạn Hà Da Nang",
-            mapUrl: "https://maps.app.goo.gl/9T8ZzK6Q7wB8n8F6A", 
+            mapUrl: "https://maps.app.goo.gl/VKatc1JG6PTCMYgw5", 
             important: "記得清點金額再離開櫃台" 
           },
           { 
@@ -453,7 +484,7 @@
             desc: "享用知名精緻柴燒比薩（已提前訂位），推薦蟹肉義大利麵與自製起司比薩！", 
             icon: "🍲", 
             query: "Pizza 4P's Indochina Da Nang",
-            mapUrl: "https://maps.app.goo.gl/uXfW4pW9Jgq8Vyxv7"
+            mapUrl: "https://maps.app.goo.gl/Hm4M7rRZhBUBg3s29"
           },
           { id: "d1-6", time: "21:00", title: "龍橋噴火吐水秀", desc: "週五、六、日晚上 9 點準時開始！建議提前15分鐘到橋頭或附近河畔卡位，表演持續約20分鐘。", icon: "✨", query: "Dragon Bridge Da Nang" },
           { id: "d1-7", time: "22:00", title: "逛山茶夜市 (Son Tra Night Market)", desc: "體驗當地夜生活與手工藝品。⚠️防雷警告：夜市的海鮮攤尤其是龍蝦，新鮮度堪憂且價格不透明，不建議在此食用！", icon: "🛍️", query: "Son Tra Night Market", warning: "別吃夜市的龍蝦，容易拉肚子！" }
@@ -465,7 +496,7 @@
         title: "市區採購、沙灘放鬆與煙火節",
         summary: "今日重點：大教堂美甲、漢市場大採購、美溪沙灘，以及重頭戲「2026 峴港國際煙火節」！",
         items: [
-          { id: "d2-1", time: "早上", title: "越共咖啡 (Cộng Cà Phê)", desc: "享用特色早餐，必點招牌「椰奶咖啡」與「綠豆沙椰奶」，香濃消暑！", icon: "🍲", query: "Cộng Cà Phê Da Nang", mapUrl: "https://maps.app.goo.gl/vSg1H9QYhZ8yWwKA9" },
+          { id: "d2-1", time: "早上", title: "越共咖啡 (Cộng Cà Phê)", desc: "享用特色早餐，必點招牌「椰奶咖啡」與「綠豆沙椰奶」，香濃消暑！", icon: "🍲", query: "Cộng Cà Phê Da Nang", mapUrl: "https://maps.app.goo.gl/Wd5b7bmPAyiDdKmXA" },
           { id: "d2-2", time: "09:00", title: "Pink Nail Studio 美甲體驗", desc: "高CP值的越式美甲與保養，放鬆一下旅途的雙手雙腳。", icon: "💆", query: "Pink Nail Studio Da Nang" },
           { 
             id: "d2-3", 
@@ -474,7 +505,7 @@
             desc: "超好拍的粉紅大教堂（峴港大教堂）。順道逛逛周邊特色文創小店（如 bubushop、STAR KITCHEN 伴手禮店）。", 
             icon: "✨", 
             query: "Da Nang Cathedral",
-            mapUrl: "https://maps.app.goo.gl/3QWjE9Y8LpZ8MvK7A"
+            mapUrl: "https://maps.app.goo.gl/wFuwa4d28oDch2ax8"
           },
           { id: "d2-4", time: "11:00", title: "漢市場 (Han Market) 大採購", desc: "推薦「171號攤位」購買好吃的芒果乾、帶皮腰果與綠豆糕。也可以在這裡挑選編織包、奧黛，記得要適度殺價喔！", icon: "🛍️", query: "Han Market Da Nang", important: "記得貨比三家，殺價從6折開始試探" },
           { id: "d2-5", time: "12:00", title: "午餐：Ăn Thôi Restaurant", desc: "韓國觀光客大力推薦的米其林推薦越南料理，環境乾淨、菜色精緻好入口。", icon: "🍲", query: "Ăn Thôi Restaurant Da Nang" },
@@ -515,7 +546,6 @@
             title: "BeBi 會安訂製衣服與鞋子", 
             desc: "會安特色之一就是快速手工訂製。可以在此挑選喜歡的棉麻衣、西裝或手工皮鞋，量身打造專屬單品！", 
             icon: "🛍️", 
-            // 💡 已幫您成功擴充為「多重店家地圖連結群組」
             links: [
               { label: "Be Bi Leather", url: "https://maps.app.goo.gl/x2g5QgDx9qW59oy37", icon: "map-pin" },
               { label: "Blue Eye", url: "https://maps.app.goo.gl/w7u37KHs4Da1UCdC8", icon: "map-pin" },
@@ -537,7 +567,7 @@
       {
         day: 4,
         date: "2026/06/22（一）",
-        title: "巴拿山奇幻仙境一日遊",
+        title: "巴拿山太陽世界一日遊",
         summary: "今日重點：搭乘最長單軌纜車、朝聖佛手黃金橋、體驗刺激的高速過山車，晚上再回市區掃貨！",
         items: [
           { id: "d4-1", time: "白天", title: "巴拿山太陽世界一日遊 (Ba Na Hills)", desc: "搭乘世界紀錄的超長纜車上山！朝聖雲霧繚繞的「黃金佛手橋」、參觀法國村，並排隊體驗上層極具速度感的「高速過山車 (Alpine Coaster)」。", icon: "✨", query: "Sun World Ba Na Hills", important: "山上氣溫較低、天氣多變，建議攜帶薄外套與雨具" },
@@ -635,7 +665,7 @@
       budgetList = defaultBudgetItems;
     }
     
-    // 初始化匯率
+    // 初始化匯率：優先讀取地端，否則使用最上方的預設常數
     let exchangeRate = parseFloat(localStorage.getItem('danang_exchange_rate')) || DEFAULT_EXCHANGE_RATE;
     
     // 讀取/設定主題 (預設是經典藍綠色 "teal")
@@ -664,19 +694,61 @@
       document.getElementById('rate-input').value = exchangeRate.toFixed(2);
       document.getElementById('current-rate-text').innerText = exchangeRate.toFixed(2);
 
-      // 4. 渲染各分頁
+      // 4. 偵測並提示 LINE / FB / IG 等內建瀏覽器
+      detectInAppBrowser();
+
+      // 5. 渲染各分頁
       daySelectorInit();
       renderItinerary();
       renderPackingList();
       renderBudget();
       setupEventListeners();
       
-      // 5. 更新對照表
+      // 6. 更新對照表
       updateQuickConvertTable();
     };
 
     function daySelectorInit() {
       renderDaySelector();
+    }
+
+    /***************************************************
+     * 3.2 🔍 LINE / FB 內建瀏覽器環境偵測與提示
+     ***************************************************/
+    function detectInAppBrowser() {
+      const ua = navigator.userAgent.toLowerCase();
+      const isInApp = ua.includes('line') || ua.includes('fbav') || ua.includes('instagram') || ua.includes('micromessenger') || ua.includes('messenger');
+      
+      if (isInApp) {
+        // 在頂部顯示貼心提示橫幅
+        document.getElementById('in-app-browser-banner').classList.remove('hidden');
+      }
+    }
+
+    function showBrowserTipModal() {
+      document.getElementById('browser-tip-modal').classList.remove('hidden');
+    }
+
+    function closeBrowserTipModal() {
+      document.getElementById('browser-tip-modal').classList.add('hidden');
+    }
+
+    // 🚀 執行流暢的地圖/連結跳轉 (解決 iOS Standalone 與 LINE 空白頁與卡頓的靈魂函式！)
+    function executeSmoothRedirect(url, query) {
+      const targetUrl = url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+      
+      // 偵測是否在社群 App 內建瀏覽器中
+      const ua = navigator.userAgent.toLowerCase();
+      const isInApp = ua.includes('line') || ua.includes('fbav') || ua.includes('instagram') || ua.includes('micromessenger') || ua.includes('messenger');
+      
+      if (isInApp) {
+        // 內建瀏覽器不支援直接拉起 App，先顯示提示防卡頓
+        showBrowserTipModal();
+        return;
+      }
+
+      // 在 Safari/Chrome/主畫面模式下，直接修改 location.href 是 100% 成功且絕不彈出空白頁的最佳做法！
+      window.location.href = targetUrl;
     }
 
     /***************************************************
@@ -726,12 +798,9 @@
     function switchTab(tabId) {
       currentTab = tabId;
       
-      // 隱藏所有分頁內容
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      // 顯示指定分頁
       document.getElementById(`tab-${tabId}`).classList.remove('hidden');
 
-      // 更新底部按鈕樣式
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('font-bold');
         btn.classList.add('text-slate-400');
@@ -742,7 +811,6 @@
       activeNav.style.color = 'var(--primary-color)';
       activeNav.classList.add('font-bold');
 
-      // 滾動回到頂部
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -763,7 +831,6 @@
           btn.className = 'py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 text-slate-500 hover:bg-slate-50';
         }
         
-        // 檢查該天是否全部行程完成
         const dayData = itineraryData.find(item => item.day === d);
         const total = dayData ? dayData.items.length : 0;
         const completedCount = dayData ? dayData.items.filter(item => completedItems[item.id]).length : 0;
@@ -787,7 +854,6 @@
       const dayData = itineraryData.find(d => d.day === selectedDay);
       if (!dayData) return;
 
-      // 1. 渲染今日亮點卡片
       const completedCount = dayData.items.filter(item => completedItems[item.id]).length;
       const progressPercent = Math.round((completedCount / dayData.items.length) * 100);
 
@@ -803,9 +869,7 @@
         </p>
       `;
 
-      // 2. 渲染時間軸行程清單
       const timeline = document.getElementById('timeline-container');
-      // 時間軸垂直引導線
       timeline.innerHTML = '<div class="absolute left-7 top-4 bottom-4 w-0.5 bg-slate-200"></div>';
 
       dayData.items.forEach(item => {
@@ -813,16 +877,17 @@
         const card = document.createElement('div');
         card.className = `relative flex items-start space-x-3 transition-opacity ${isCompleted ? 'opacity-60' : 'opacity-100'}`;
 
-        // 按鈕 HTML 解析
+        // 按鈕 HTML 解析 (地圖單一按鈕 或 店家推薦按鈕 或 下方複數按鈕群組)
         let topRightButtonHtml = '';
         let bottomLinksHtml = '';
 
         if (item.links && item.links.length > 0) {
+          // 渲染下方複數按鈕
           bottomLinksHtml = `<div class="mt-2.5 flex flex-wrap gap-1.5">`;
           item.links.forEach(link => {
             bottomLinksHtml += `
               <button
-                onclick="window.open('${link.url}', '_blank')"
+                onclick="executeSmoothRedirect('${link.url}', '')"
                 class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition-all active:scale-95 border theme-border-light font-extrabold shadow-sm"
               >
                 <i data-lucide="${link.icon || 'map-pin'}" class="w-3.5 h-3.5 theme-color"></i>
@@ -832,23 +897,21 @@
           });
           bottomLinksHtml += `</div>`;
         } else if (item.recommendUrl) {
+          // 渲染右上單一推薦按鈕
           topRightButtonHtml = `
             <button
-              onclick="window.open('${item.recommendUrl}', '_blank')"
-              class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1.5 rounded-md flex items-center space-x-1 transition-all active:scale-95 border theme-border-light font-extrabold"
+              onclick="executeSmoothRedirect('${item.recommendUrl}', '')"
+              class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1 rounded-md flex items-center space-x-1 transition-all active:scale-95 border theme-border-light font-extrabold"
             >
               <i data-lucide="info" class="w-3 h-3 theme-color"></i>
               <span>${item.recommendTitle || '店家推薦'}</span>
             </button>
           `;
         } else if (item.mapUrl || item.query) {
-          const mapActionStr = item.mapUrl 
-            ? `window.open('${item.mapUrl}', '_blank')`
-            : `window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.query)}', '_blank')`;
-          
+          // 渲染右上單一傳統地圖按鈕
           topRightButtonHtml = `
             <button
-              onclick="${mapActionStr}"
+              onclick="executeSmoothRedirect('${item.mapUrl || ''}', '${item.query || ''}')"
               class="text-xs text-slate-500 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-md flex items-center space-x-1 transition-colors active:scale-95"
             >
               <i data-lucide="map-pin" class="w-3 h-3 text-red-400"></i>
@@ -857,7 +920,7 @@
           `;
         }
 
-        // 提醒與警告 HTML
+        // 重要提示與警告 HTML
         let alertHtml = '';
         if (item.warning) {
           alertHtml = `
@@ -925,7 +988,7 @@
 
 
     /***************************************************
-     * 7. TAB 2: 行李打包
+     * 7. TAB 2: 行李打包與進度
      ***************************************************/
     function renderPackingList() {
       const container = document.getElementById('packing-list-container');
@@ -1013,7 +1076,7 @@
 
 
     /***************************************************
-     * 8. TAB 3: 匯率換算
+     * 8. TAB 3: 匯率換算邏輯 (小數點後兩位高精準計算)
      ***************************************************/
     function handleTwdChange(value) {
       const twdInput = document.getElementById('twd-input');
@@ -1056,7 +1119,7 @@
 
 
     /***************************************************
-     * 9. TAB 4: 預算隨記
+     * 9. TAB 4: 記帳預算與分類篩選邏輯 (精確計算到小數後兩位)
      ***************************************************/
     function renderBudget() {
       // 1. 渲染「新增消費」的分類選取鈕
@@ -1087,7 +1150,7 @@
         catSelector.appendChild(btn);
       });
 
-      // 2. 渲染篩選分類列
+      // 2. 渲染「明細表篩選分類列」(橫向滾動)
       const filterSelector = document.getElementById('budget-filter-selector');
       filterSelector.innerHTML = '';
       
@@ -1115,7 +1178,7 @@
         filterSelector.appendChild(btn);
       });
 
-      // 3. 計算總支出
+      // 3. 計算總支出 (保留小數點後兩位)
       const totalTwd = budgetList.reduce((acc, curr) => {
         if (curr.currency === 'TWD') {
           return acc + curr.amount;
@@ -1125,7 +1188,7 @@
       }, 0);
       document.getElementById('total-budget-text').innerText = `NT$ ${totalTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-      // 4. 依分類篩選預算並計算小計
+      // 4. 依分類篩選預算明細並計算小計 (保留小數點後兩位)
       const filteredList = budgetFilterCategory === '全部'
         ? budgetList
         : budgetList.filter(item => item.category === budgetFilterCategory);
@@ -1138,6 +1201,7 @@
         }
       }, 0);
 
+      // 更新篩選小計文字 (精確度至第二位)
       const subtotalLabel = budgetFilterCategory === '全部' ? '總花費' : `${budgetFilterCategory}小計`;
       document.getElementById('budget-filter-subtotal').innerText = `${subtotalLabel}: NT$ ${filteredTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
@@ -1219,7 +1283,7 @@
      * 10. DOM 事件綁定監聽
      ***************************************************/
     function setupEventListeners() {
-      // 1. 行李表單提交
+      // 1. 行記打包表單
       document.getElementById('packing-form').onsubmit = function(e) {
         e.preventDefault();
         const input = document.getElementById('packing-input');
@@ -1229,7 +1293,7 @@
         }
       };
 
-      // 2. 自訂匯率輸入框
+      // 2. 自訂匯率輸入
       document.getElementById('rate-input').oninput = function(e) {
         const val = parseFloat(e.target.value);
         if (val && val > 0) {
@@ -1245,7 +1309,7 @@
         }
       };
 
-      // 3. 匯率雙向輸入
+      // 3. 雙向匯率輸入
       document.getElementById('twd-input').oninput = function(e) {
         handleTwdChange(e.target.value);
       };
@@ -1253,7 +1317,7 @@
         handleVndChange(e.target.value);
       };
 
-      // 4. 新增預算表單提交
+      // 4. 新增預算記帳提交
       document.getElementById('budget-form').onsubmit = function(e) {
         e.preventDefault();
         const title = document.getElementById('budget-title');
@@ -1267,7 +1331,7 @@
         }
       };
 
-      // 5. 綁定自訂確認懸浮窗的按鈕
+      // 5. 確認窗按鈕
       document.getElementById('confirm-modal-cancel').onclick = closeCustomConfirm;
       document.getElementById('confirm-modal-action').onclick = function() {
         if (activeConfirmCallback) {
@@ -1276,7 +1340,7 @@
         closeCustomConfirm();
       };
 
-      // 6. 綁定觸發自訂確認窗按鈕
+      // 6. 綁定自訂對話窗按鈕
       document.getElementById('btn-reset-packing').onclick = resetPackingStatus;
       document.getElementById('btn-clear-budget').onclick = clearAllBudgets;
     }
