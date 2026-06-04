@@ -7,19 +7,19 @@
   <title>峴港 5 天 4 夜互動旅伴</title>
   
   <!-- =================📱 iOS Safari 加入主畫面專屬美化設定 ================= -->
-  <!-- 1. 桌面圖示：使用高相容性的 512x512 高解析度莫蘭迪粉嫩「椰子樹度假小島 🏝️」PNG 圖片 -->
+  <!-- 桌面圖示：高相容性的 512x512 高解析度莫蘭迪粉嫩「椰子樹度假小島 🏝️」PNG 圖片 -->
   <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/512x512/1f3dd.png">
   
-  <!-- 2. 允許網頁以 全螢幕 App 模式 執行 (隱藏 Safari 網址列與底部導航欄) -->
+  <!-- 允許網頁以 全螢幕 App 模式 執行 (隱藏 Safari 網址列與底部導航欄) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   
-  <!-- 3. iOS 桌面 App 顯示名稱 (可自由修改) -->
+  <!-- iOS 桌面 App 顯示名稱 -->
   <meta name="apple-mobile-web-app-title" content="峴港旅伴">
   
-  <!-- 4. iOS 頂部狀態列顏色 (設為 default 可讓時間與電量維持高對比灰色，配合粉嫩主題) -->
+  <!-- iOS 頂部狀態列顏色 -->
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   
-  <!-- 5. Android Chrome 頂部系統欄顏色 -->
+  <!-- Android Chrome 頂部系統欄顏色 -->
   <meta name="theme-color" content="#e0f2fe">
   
   <!-- 載入 Tailwind CSS 用於精美排版 -->
@@ -133,7 +133,7 @@
     <div class="flex justify-between items-center mt-2.5 pt-2 border-t border-slate-800/10">
       <p class="text-slate-600 text-[11px] font-medium">貼心的行動導航、行李清單與即時記帳</p>
       
-      <!-- 🎨 風格快速切換鈕群組 -->
+      <!-- 🎨 風格快速切換鈕群組 (低飽和高顏值小圓點) -->
       <div class="flex items-center space-x-1.5 bg-white/30 p-1 rounded-full border border-slate-800/5">
         <button onclick="setTheme('teal')" class="w-3.5 h-3.5 rounded-full bg-[#a7f3d0] border border-white/60 active:scale-125 transition-transform" title="經典峴港"></button>
         <button onclick="setTheme('lantern')" class="w-3.5 h-3.5 rounded-full bg-[#fed7aa] border border-white/60 active:scale-125 transition-transform" title="會安燈籠"></button>
@@ -412,9 +412,9 @@
   <script>
     /***************************************************
      * 0. 全域預設設定區
-     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780 即可！
+     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780.00 即可！
      ***************************************************/
-    const DEFAULT_EXCHANGE_RATE = 834.60; // 👈 預設台幣對越南盾匯率
+    const DEFAULT_EXCHANGE_RATE = 780.00; // 👈 預設台幣對越南盾匯率
 
     /***************************************************
      * 1. 詳細行程資料
@@ -596,15 +596,42 @@
     ];
 
     /***************************************************
-     * 2. 狀態管理
+     * 2. 狀態管理 (引入防當機安全機制)
      ***************************************************/
     let currentTab = 'itinerary';
     let selectedDay = 1;
-    let completedItems = JSON.parse(localStorage.getItem('danang_completed_items')) || {};
-    let packingItems = JSON.parse(localStorage.getItem('danang_packing_items')) || defaultPackingItems;
-    let budgetList = JSON.parse(localStorage.getItem('danang_budget_items')) || defaultBudgetItems;
     
-    // 初始化匯率：優先讀取地端，否則使用最上方的預設常數
+    let completedItems = {};
+    try {
+      completedItems = JSON.parse(localStorage.getItem('danang_completed_items')) || {};
+    } catch (e) {
+      console.error("無法剖析行程完成紀錄，已自動重設。", e);
+      completedItems = {};
+    }
+
+    let packingItems = defaultPackingItems;
+    try {
+      const savedPacking = localStorage.getItem('danang_packing_items');
+      if (savedPacking) {
+        packingItems = JSON.parse(savedPacking);
+      }
+    } catch (e) {
+      console.error("無法剖析行李打包紀錄，已重設為預設值。", e);
+      packingItems = defaultPackingItems;
+    }
+
+    let budgetList = defaultBudgetItems;
+    try {
+      const savedBudget = localStorage.getItem('danang_budget_items');
+      if (savedBudget) {
+        budgetList = JSON.parse(savedBudget);
+      }
+    } catch (e) {
+      console.error("無法剖析消費記帳紀錄，已重設為預設值。", e);
+      budgetList = defaultBudgetItems;
+    }
+    
+    // 初始化匯率
     let exchangeRate = parseFloat(localStorage.getItem('danang_exchange_rate')) || DEFAULT_EXCHANGE_RATE;
     
     // 讀取/設定主題 (預設是經典藍綠色 "teal")
@@ -704,12 +731,10 @@
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('font-bold');
         btn.classList.add('text-slate-400');
-        // 清除內建變數配色以防止殘留
         btn.style.color = '';
       });
       const activeNav = document.getElementById(`nav-${tabId}`);
       activeNav.classList.remove('text-slate-400');
-      // 動態給予底部作用中導覽列對應的主題字體顏色
       activeNav.style.color = 'var(--primary-color)';
       activeNav.classList.add('font-bold');
 
@@ -718,7 +743,7 @@
     }
 
     /***************************************************
-     * 6. TAB 1: 行程渲染邏輯
+     * 6. TAB 1: 行程渲染邏輯 (徹底清除了任何轉譯反斜線)
      ***************************************************/
     function renderDaySelector() {
       const container = document.getElementById('day-selector');
@@ -729,9 +754,9 @@
         const btn = document.createElement('button');
         
         if (isCurrent) {
-          btn.className = `py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 theme-gradient text-slate-800 shadow-sm font-bold scale-105 border border-white/20`;
+          btn.className = 'py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 theme-gradient text-slate-800 shadow-sm font-bold scale-105 border border-white/20';
         } else {
-          btn.className = `py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 text-slate-500 hover:bg-slate-50`;
+          btn.className = 'py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 text-slate-500 hover:bg-slate-50';
         }
         
         // 檢查該天是否全部行程完成
@@ -774,9 +799,8 @@
         </p>
       `;
 
-      // 2. 渲染時間軸清單
+      // 2. 渲染時間軸行程清單
       const timeline = document.getElementById('timeline-container');
-      // 保留垂直導引線
       timeline.innerHTML = '<div class="absolute left-7 top-4 bottom-4 w-0.5 bg-slate-200"></div>';
 
       dayData.items.forEach(item => {
@@ -789,7 +813,6 @@
         let bottomLinksHtml = '';
 
         if (item.links && item.links.length > 0) {
-          // 渲染下方複數按鈕
           bottomLinksHtml = `<div class="mt-2.5 flex flex-wrap gap-1.5">`;
           item.links.forEach(link => {
             bottomLinksHtml += `
@@ -804,7 +827,6 @@
           });
           bottomLinksHtml += `</div>`;
         } else if (item.recommendUrl) {
-          // 渲染右上單一推薦按鈕
           topRightButtonHtml = `
             <button
               onclick="window.open('${item.recommendUrl}', '_blank')"
@@ -815,7 +837,6 @@
             </button>
           `;
         } else if (item.mapUrl || item.query) {
-          // 渲染右上單一傳統地圖按鈕
           const mapActionStr = item.mapUrl 
             ? `window.open('${item.mapUrl}', '_blank')`
             : `window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.query)}', '_blank')`;
@@ -828,6 +849,24 @@
               <i data-lucide="map-pin" class="w-3 h-3 text-red-400"></i>
               <span>${item.mapUrl ? '精確位置' : '地圖'}</span>
             </button>
+          `;
+        }
+
+        // 重要提示與警告 HTML
+        let alertHtml = '';
+        if (item.warning) {
+          alertHtml = `
+            <div class="mt-2 flex items-start space-x-1 bg-red-50 border border-red-100 text-red-700 p-2 rounded-lg text-[11px] font-medium animate-pulse">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0 text-red-500 mt-0.5"></i>
+              <span>${item.warning}</span>
+            </div>
+          `;
+        } else if (item.important) {
+          alertHtml = `
+            <div class="mt-2 flex items-start space-x-1 bg-amber-50 border border-amber-100 text-amber-700 p-2 rounded-lg text-[11px] font-medium">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 shrink-0 text-amber-500 mt-0.5"></i>
+              <span>${item.important}</span>
+            </div>
           `;
         }
 
@@ -969,7 +1008,7 @@
 
 
     /***************************************************
-     * 8. TAB 3: 匯率換算邏輯 (小數點後兩位高精準計算)
+     * 8. TAB 3: 匯率換算邏輯
      ***************************************************/
     function handleTwdChange(value) {
       const twdInput = document.getElementById('twd-input');
@@ -1012,7 +1051,7 @@
 
 
     /***************************************************
-     * 9. TAB 4: 記帳預算與分類篩選邏輯 (精確計算到小數後兩位)
+     * 9. TAB 4: 記帳預算與分類篩選邏輯
      ***************************************************/
     function renderBudget() {
       // 1. 渲染「新增消費」的分類選取鈕
@@ -1026,11 +1065,11 @@
         btn.type = 'button';
         
         if (isSelected) {
-          btn.className = `px-2 py-0.5 rounded text-[10px] font-extrabold transition-all border text-slate-800 shadow-sm`;
+          btn.className = 'px-2 py-0.5 rounded text-[10px] font-extrabold transition-all border text-slate-800 shadow-sm';
           btn.style.background = 'var(--primary-gradient)';
           btn.style.borderColor = 'var(--primary-color)';
         } else {
-          btn.className = `px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-white text-slate-500 hover:bg-slate-100 border border-slate-200`;
+          btn.className = 'px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-white text-slate-500 hover:bg-slate-100 border border-slate-200';
           btn.style.background = '';
           btn.style.borderColor = '';
         }
@@ -1054,11 +1093,11 @@
         btn.type = 'button';
         
         if (isSelected) {
-          btn.className = `px-3 py-1 rounded-full text-xs font-extrabold transition-all border text-slate-800 shadow-sm shrink-0`;
+          btn.className = 'px-3 py-1 rounded-full text-xs font-extrabold transition-all border text-slate-800 shadow-sm shrink-0';
           btn.style.background = 'var(--primary-gradient)';
           btn.style.borderColor = 'var(--primary-color)';
         } else {
-          btn.className = `px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-slate-500 hover:bg-slate-100 border border-slate-200 shrink-0`;
+          btn.className = 'px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-slate-500 hover:bg-slate-100 border border-slate-200 shrink-0';
           btn.style.background = '';
           btn.style.borderColor = '';
         }
@@ -1071,7 +1110,7 @@
         filterSelector.appendChild(btn);
       });
 
-      // 3. 計算總支出 (保留小數點後兩位)
+      // 3. 計算總支出
       const totalTwd = budgetList.reduce((acc, curr) => {
         if (curr.currency === 'TWD') {
           return acc + curr.amount;
@@ -1081,7 +1120,7 @@
       }, 0);
       document.getElementById('total-budget-text').innerText = `NT$ ${totalTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-      // 4. 依分類篩選預算明細並計算小計 (保留小數點後兩位)
+      // 4. 依分類篩選預算明細並計算小計
       const filteredList = budgetFilterCategory === '全部'
         ? budgetList
         : budgetList.filter(item => item.category === budgetFilterCategory);
@@ -1094,7 +1133,7 @@
         }
       }, 0);
 
-      // 更新篩選小計文字 (精確度至第二位)
+      // 更新篩選小計文字
       const subtotalLabel = budgetFilterCategory === '全部' ? '總花費' : `${budgetFilterCategory}小計`;
       document.getElementById('budget-filter-subtotal').innerText = `${subtotalLabel}: NT$ ${filteredTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
@@ -1186,7 +1225,7 @@
         }
       };
 
-      // 2. 自訂匯率輸入框 (支援精確小數浮點數讀取)
+      // 2. 自訂匯率輸入框 (支援精確小數)
       document.getElementById('rate-input').oninput = function(e) {
         const val = parseFloat(e.target.value);
         if (val && val > 0) {
