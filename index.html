@@ -1,12 +1,27 @@
 
-
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>峴港互動旅伴</title>
+  <title>峴港 5 天 4 夜互動旅伴</title>
+  
+  <!-- =================📱 iOS Safari 加入主畫面專屬美化設定 ================= -->
+  <!-- 1. 桌面圖示：使用高相容性的 512x512 高解析度莫蘭迪粉嫩「椰子樹度假小島 🏝️」PNG 圖片 -->
+  <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/512x512/1f3dd.png">
+  
+  <!-- 2. 允許網頁以 全螢幕 App 模式 執行 (隱藏 Safari 網址列與底部導航欄) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <!-- 3. iOS 桌面 App 顯示名稱 (可自由修改) -->
+  <meta name="apple-mobile-web-app-title" content="峴港旅伴">
+  
+  <!-- 4. iOS 頂部狀態列顏色 (設為 default 可讓時間與電量維持高對比灰色，配合粉嫩主題) -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- 5. Android Chrome 頂部系統欄顏色 -->
+  <meta name="theme-color" content="#e0f2fe">
+  
   <!-- 載入 Tailwind CSS 用於精美排版 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 載入 Lucide Icons 用於漂亮圖標 -->
@@ -118,7 +133,7 @@
     <div class="flex justify-between items-center mt-2.5 pt-2 border-t border-slate-800/10">
       <p class="text-slate-600 text-[11px] font-medium">貼心的行動導航、行李清單與即時記帳</p>
       
-      <!-- 🎨 風格快速切換鈕群組 (低飽和高顏值小圓點) -->
+      <!-- 🎨 風格快速切換鈕群組 -->
       <div class="flex items-center space-x-1.5 bg-white/30 p-1 rounded-full border border-slate-800/5">
         <button onclick="setTheme('teal')" class="w-3.5 h-3.5 rounded-full bg-[#a7f3d0] border border-white/60 active:scale-125 transition-transform" title="經典峴港"></button>
         <button onclick="setTheme('lantern')" class="w-3.5 h-3.5 rounded-full bg-[#fed7aa] border border-white/60 active:scale-125 transition-transform" title="會安燈籠"></button>
@@ -205,14 +220,14 @@
         <div class="theme-bg-light p-3 rounded-lg border theme-border-light mb-4 text-xs transition-colors duration-300">
           <div class="flex justify-between items-center mb-2">
             <span class="font-semibold text-slate-600">目前匯率：</span>
-            <span class="theme-color font-bold">1 台幣 (TWD) ≈ <span id="current-rate-text">835.58</span> 越南盾 (VND)</span>
+            <span class="theme-color font-bold">1 台幣 (TWD) ≈ <span id="current-rate-text">780.00</span> 越南盾 (VND)</span>
           </div>
           <div class="flex items-center space-x-2">
             <label class="text-slate-500 font-medium">自訂匯率：1 TWD = </label>
             <input
               type="number"
               id="rate-input"
-              value="835.58"
+              value="780.00"
               step="0.01"
               class="w-24 px-2 py-1 border border-slate-200 rounded text-center focus:outline-none theme-color font-extrabold bg-white"
             >
@@ -399,7 +414,7 @@
      * 0. 全域預設設定區
      * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780 即可！
      ***************************************************/
-    const DEFAULT_EXCHANGE_RATE = 780.00; // 👈 預設台幣對越南盾匯率，已支援小數點後兩位
+    const DEFAULT_EXCHANGE_RATE = 834.60; // 👈 預設台幣對越南盾匯率
 
     /***************************************************
      * 1. 詳細行程資料
@@ -479,7 +494,7 @@
             id: "d2-9", 
             time: "19:00", 
             title: "提早出發前往煙火會場", 
-            desc: "煙火節期間交通管制嚴格，需提早搭車，並做好步行約1公里至「陳興道街（Tran Hung Dao）」主看台的準備。", 
+            desc: "煙火節期間交通管制嚴格，需提早搭車，並做好步行約1公里至「陳興道街（Tran Hung Dao）」主看台 of 準備。", 
             icon: "⏱️", 
             query: "Tran Hung Dao Street Da Nang",
             mapUrl: "https://maps.app.goo.gl/uCBnfF1n6TRXDnF38?g_st=ic"
@@ -816,24 +831,6 @@
           `;
         }
 
-        // 重要提示與警告 HTML
-        let alertHtml = '';
-        if (item.warning) {
-          alertHtml = `
-            <div class="mt-2 flex items-start space-x-1 bg-red-50 border border-red-100 text-red-700 p-2 rounded-lg text-[11px] font-medium animate-pulse">
-              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0 text-red-500 mt-0.5"></i>
-              <span>${item.warning}</span>
-            </div>
-          `;
-        } else if (item.important) {
-          alertHtml = `
-            <div class="mt-2 flex items-start space-x-1 bg-amber-50 border border-amber-100 text-amber-700 p-2 rounded-lg text-[11px] font-medium">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5 shrink-0 text-amber-500 mt-0.5"></i>
-              <span>${item.important}</span>
-            </div>
-          `;
-        }
-
         const checkIcon = isCompleted 
           ? `<i data-lucide="check-circle-2" class="w-6 h-6 theme-color fill-slate-50"></i>` 
           : `<i data-lucide="circle" class="w-6 h-6 text-slate-300 hover:text-[var(--primary-color)]"></i>`;
@@ -979,7 +976,6 @@
       const vndInput = document.getElementById('vnd-input');
       twdInput.value = value;
       if (!isNaN(value) && value !== '') {
-        // 台幣轉換成越南盾：保留兩位小數計算
         vndInput.value = (parseFloat(value) * exchangeRate).toFixed(2);
       } else {
         vndInput.value = '';
@@ -991,7 +987,6 @@
       const vndInput = document.getElementById('vnd-input');
       vndInput.value = value;
       if (!isNaN(value) && value !== '') {
-        // 越南盾轉換成台幣：保留兩位小數精確呈現
         twdInput.value = (parseFloat(value) / exchangeRate).toFixed(2);
       } else {
         twdInput.value = '';
@@ -1020,7 +1015,7 @@
      * 9. TAB 4: 記帳預算與分類篩選邏輯 (精確計算到小數後兩位)
      ***************************************************/
     function renderBudget() {
-      // 1. 渲染「新增消費」的分類選取鈕 (在表單內)
+      // 1. 渲染「新增消費」的分類選取鈕
       const categories = ['餐飲', '交通', '住宿', '門票', '美甲Spa', '購物', '其他'];
       const catSelector = document.getElementById('budget-category-selector');
       catSelector.innerHTML = '<span class="text-xs text-slate-500 font-bold">分類:</span>';
@@ -1119,7 +1114,6 @@
         const div = document.createElement('div');
         div.className = 'flex justify-between items-center p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs border border-slate-100 transition-colors duration-150';
         
-        // 明細估算折合台幣支援小數後二位顯示
         const estTwd = item.currency === 'VND' 
           ? `約折合 NT$ ${(item.amount / exchangeRate).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}` 
           : '台幣直接計價';
@@ -1127,7 +1121,7 @@
         div.innerHTML = `
           <div>
             <div class="flex items-center space-x-1.5">
-              <span class="px-1.5 py-0.5 text-[9px] bg-white text-slate-600 font-extrabold rounded-md border border-slate-200">
+              <span class="px-1.5 py-0.5 text-[9px] bg-white text-slate-600 font-bold rounded-md border border-slate-200">
                 ${item.category}
               </span>
               <span class="font-extrabold text-slate-800">${item.title}</span>
@@ -1159,8 +1153,6 @@
       };
       budgetList.unshift(newItem); // 新記錄排最前面
       localStorage.setItem('danang_budget_items', JSON.stringify(budgetList));
-      
-      // 新增成功後，自動將篩選切換回全部，以便查看最新一筆消費
       budgetFilterCategory = '全部';
       renderBudget();
     }
@@ -1202,11 +1194,9 @@
           localStorage.setItem('danang_exchange_rate', exchangeRate);
           document.getElementById('current-rate-text').innerText = exchangeRate.toFixed(2);
           
-          // 重新換算當前台幣與越南盾輸入值
           const twdVal = document.getElementById('twd-input').value;
           handleTwdChange(twdVal);
           
-          // 更新對照表與預算總結
           updateQuickConvertTable();
           renderBudget();
         }
