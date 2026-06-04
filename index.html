@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>峴港 5 天 4 夜互動旅伴</title>
+  <!-- 載入 Tailwind CSS 用於精美排版 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入 Lucide Icons 用於漂亮圖標 -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* 隱藏滾動條但保持滾動功能 */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.3s ease;
+    }
+
+    /* 🎨 莫蘭迪低飽和粉嫩主題定義 (Morandi & Milky Pastel Themes) */
+    
+    /* 1. 經典峴港 (Soft Pastel Mint) - 晨霧薄荷藍綠色 */
+    body[data-theme="teal"] {
+      --primary-gradient: linear-gradient(135deg, #e0f2fe, #d1fae5); /* 輕柔湖水藍至馬卡龍薄荷綠 */
+      --primary-color: #2e6f67; /* 莫蘭迪深綠灰（維持文字易讀性） */
+      --bg-light: #f0faf8; 
+      --border-light: #daf2ee; 
+      --accent-color: #2e6f67;
+      --accent-text: #24544e;
+      --card-highlight: #64a69d;
+      --tab-active-text: #2e6f67;
+      --bullet-color: #64a69d;
+    }
+
+    /* 2. 會安燈籠 (Soft Apricot Peach) - 奶油杏桃花粉色 */
+    body[data-theme="lantern"] {
+      --primary-gradient: linear-gradient(135deg, #ffedd5, #ffe4e6); /* 溫柔奶杏黃至淡粉玫瑰 */
+      --primary-color: #9a5332; /* 莫蘭迪暖木棕 */
+      --bg-light: #fffcf8; 
+      --border-light: #fdf0df; 
+      --accent-color: #9a5332;
+      --accent-text: #733c22;
+      --card-highlight: #b27a5d;
+      --tab-active-text: #9a5332;
+      --bullet-color: #b27a5d;
+    }
+
+    /* 3. 巴拿山林 (Muted Matcha Green) - 靜謐宇治抹茶綠 */
+    body[data-theme="forest"] {
+      --primary-gradient: linear-gradient(135deg, #f0fdf4, #dcfce7); /* 極淡茶綠至抹茶白 */
+      --primary-color: #3f6e52; /* 莫蘭迪深森林綠 */
+      --bg-light: #f5faf7; 
+      --border-light: #e3f2ea; 
+      --accent-color: #3f6e52;
+      --accent-text: #2c4d39;
+      --card-highlight: #609674;
+      --tab-active-text: #3f6e52;
+      --bullet-color: #609674;
+    }
+
+    /* 4. 璀璨夜煙火 (Pale Periwinkle) - 淡雅丁香長春花藍紫 */
+    body[data-theme="midnight"] {
+      --primary-gradient: linear-gradient(135deg, #e0e7ff, #f3e8ff); /* 粉嫩粉藍至薰衣草淡紫 */
+      --primary-color: #4b4b8a; /* 莫蘭迪深藍紫 */
+      --bg-light: #f6f7ff; 
+      --border-light: #ebeeff; 
+      --accent-color: #4b4b8a;
+      --accent-text: #333361;
+      --card-highlight: #7070ad;
+      --tab-active-text: #4b4b8a;
+      --bullet-color: #7070ad;
+    }
+
+    /* 5. 文青粉彩 (Sakura Baby Pink) - 櫻花泡泡草莓牛奶 */
+    body[data-theme="pink"] {
+      --primary-gradient: linear-gradient(135deg, #fce7f3, #fae8ff); /* 櫻花粉至極淡棉花紫 */
+      --primary-color: #8c4365; /* 莫蘭迪玫瑰灰 */
+      --bg-light: #fff8fc; 
+      --border-light: #fde8f5; 
+      --accent-color: #8c4365;
+      --accent-text: #69304b;
+      --card-highlight: #ad6d8c;
+      --tab-active-text: #8c4365;
+      --bullet-color: #ad6d8c;
+    }
+
+    /* 套用主題變數到特定的輔助類別 */
+    .theme-gradient { background: var(--primary-gradient); }
+    .theme-color { color: var(--primary-color); }
+    .theme-border { border-color: var(--primary-color); }
+    .theme-bg-light { background-color: var(--bg-light); }
+    .theme-border-light { border-color: var(--border-light); }
+    .theme-accent-text { color: var(--accent-text); }
+  </style>
+</head>
+<body data-theme="teal" class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between max-w-md mx-auto shadow-2xl relative border-x border-slate-200">
+
+  <!-- 頂部 Header -->
+  <header class="theme-gradient text-slate-800 px-4 py-5 rounded-b-3xl shadow-sm sticky top-0 z-30 transition-all duration-500">
+    <div class="flex justify-between items-center mb-1">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl">🇻🇳</span>
+        <h1 class="text-lg font-extrabold tracking-wide text-slate-800">開心地玩峴港吧！</h1>
+      </div>
+      <span class="bg-white/40 text-slate-700 text-[11px] px-2.5 py-1 rounded-full font-bold backdrop-blur-md">
+        06/19 ~ 06/23
+      </span>
+    </div>
+    
+    <div class="flex justify-between items-center mt-2.5 pt-2 border-t border-slate-800/10">
+      <p class="text-slate-600 text-[11px] font-medium">貼心的行動導航、行李清單與即時記帳</p>
+      
+      <!-- 🎨 風格快速切換鈕群組 (低飽和高顏值小圓點) -->
+      <div class="flex items-center space-x-1.5 bg-white/30 p-1 rounded-full border border-slate-800/5">
+        <button onclick="setTheme('teal')" class="w-3.5 h-3.5 rounded-full bg-[#a7f3d0] border border-white/60 active:scale-125 transition-transform" title="經典峴港"></button>
+        <button onclick="setTheme('lantern')" class="w-3.5 h-3.5 rounded-full bg-[#fed7aa] border border-white/60 active:scale-125 transition-transform" title="會安燈籠"></button>
+        <button onclick="setTheme('forest')" class="w-3.5 h-3.5 rounded-full bg-[#dcfce7] border border-white/60 active:scale-125 transition-transform" title="巴拿山林"></button>
+        <button onclick="setTheme('midnight')" class="w-3.5 h-3.5 rounded-full bg-[#e0e7ff] border border-white/60 active:scale-125 transition-transform" title="璀璨夜煙火"></button>
+        <button onclick="setTheme('pink')" class="w-3.5 h-3.5 rounded-full bg-[#fce7f3] border border-white/60 active:scale-125 transition-transform" title="文青粉彩"></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要內容區 -->
+  <main class="flex-1 px-4 py-4 pb-24 overflow-y-auto" id="main-content">
+    
+    <!-- ================= TAB 1: 詳細行程 ================= -->
+    <div id="tab-itinerary" class="tab-content space-y-4">
+      <!-- 天數切換按鈕 -->
+      <div class="grid grid-cols-5 gap-1.5 bg-white p-1 rounded-xl shadow-sm border border-slate-100" id="day-selector">
+        <!-- JS 動態生成按鈕 -->
+      </div>
+
+      <!-- 今日亮點 -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 theme-border transition-all duration-300" id="day-summary-card">
+        <!-- JS 動態生成亮點內容 -->
+      </div>
+
+      <!-- 時間軸行程清單 -->
+      <div class="relative pl-4 space-y-5" id="timeline-container">
+        <!-- 時間軸垂直引導線 -->
+        <div class="absolute left-7 top-4 bottom-4 w-0.5 bg-slate-200"></div>
+        <!-- JS 動態生成行程項目 -->
+      </div>
+    </div>
+
+    <!-- ================= TAB 2: 行李打包 ================= -->
+    <div id="tab-packing" class="tab-content hidden space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+        <h2 class="text-base font-bold text-slate-800 mb-1 flex items-center space-x-1.5">
+          <i data-lucide="briefcase" class="w-5 h-5 theme-color"></i>
+          <span>出遊行李打包清單</span>
+        </h2>
+        <p class="text-xs text-slate-500 mb-3">出發與回程前勾選，重要物品不遺漏！</p>
+
+        <!-- 新增自訂行李表單 -->
+        <form id="packing-form" class="flex space-x-2 mb-4">
+          <input
+            type="text"
+            id="packing-input"
+            placeholder="新增行李項目（如：防曬帽）"
+            class="flex-1 px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[var(--primary-color)] bg-slate-50/50"
+            required
+          >
+          <button
+            type="submit"
+            class="theme-gradient text-slate-700 px-4 py-2 rounded-lg text-xs font-bold active:scale-95 transition-all shadow-sm border border-white/20"
+          >
+            新增
+          </button>
+        </form>
+
+        <!-- 行李分類清單容器 -->
+        <div id="packing-list-container" class="space-y-4">
+          <!-- JS 動態渲染 -->
+        </div>
+
+        <button
+          id="btn-reset-packing"
+          class="w-full mt-4 py-2.5 text-xs text-slate-500 bg-slate-100 rounded-lg hover:bg-slate-200 font-semibold active:scale-[0.98] transition-all"
+        >
+          重置行李打勾狀態
+        </button>
+      </div>
+    </div>
+
+    <!-- ================= TAB 3: 匯率換算 ================= -->
+    <div id="tab-converter" class="tab-content hidden space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+        <h2 class="text-base font-bold text-slate-800 mb-1 flex items-center space-x-1.5">
+          <i data-lucide="coins" class="w-5 h-5 theme-color"></i>
+          <span>台幣 ↔ 越南盾 快速換算</span>
+        </h2>
+        <p class="text-xs text-slate-500 mb-4">即時雙向計算，買東西不怕算錯位數！</p>
+
+        <!-- 匯率自訂 -->
+        <div class="theme-bg-light p-3 rounded-lg border theme-border-light mb-4 text-xs transition-colors duration-300">
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-semibold text-slate-600">目前匯率：</span>
+            <span class="theme-color font-bold">1 台幣 (TWD) ≈ <span id="current-rate-text">780</span> 越南盾 (VND)</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <label class="text-slate-500 font-medium">自訂匯率：1 TWD = </label>
+            <input
+              type="number"
+              id="rate-input"
+              value="780"
+              class="w-20 px-2 py-1 border border-slate-200 rounded text-center focus:outline-none theme-color font-extrabold bg-white"
+            >
+            <span class="text-slate-500 font-medium">VND</span>
+          </div>
+        </div>
+
+        <!-- 輸入欄位 -->
+        <div class="space-y-4">
+          <div class="theme-bg-light p-3.5 rounded-xl border theme-border-light transition-colors duration-300">
+            <label class="block text-xs font-extrabold theme-accent-text mb-1">新台幣 (TWD)</label>
+            <div class="flex items-center">
+              <span class="text-lg font-bold theme-color mr-2">NT$</span>
+              <input
+                type="number"
+                id="twd-input"
+                value="1000"
+                placeholder="輸入台幣金額"
+                class="w-full bg-white px-3 py-2 text-base font-bold border border-slate-200 rounded-lg focus:outline-none"
+              >
+            </div>
+          </div>
+
+          <div class="flex justify-center -my-2 relative z-10">
+            <div class="theme-gradient text-slate-700 p-2 rounded-full shadow-md transition-all duration-300 border border-white/40">
+              <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+            <label class="block text-xs font-extrabold text-slate-500 mb-1">越南盾 (VND)</label>
+            <div class="flex items-center">
+              <span class="text-lg font-bold text-slate-600 mr-2">₫</span>
+              <input
+                type="number"
+                id="vnd-input"
+                value="780000"
+                placeholder="輸入越南盾金額"
+                class="w-full bg-white px-3 py-2 text-base font-bold border border-slate-200 rounded-lg focus:outline-none"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- 快速對照表 -->
+        <div class="mt-6">
+          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">常用面額快速對照</h3>
+          <div class="grid grid-cols-2 gap-2 text-xs" id="quick-convert-table">
+            <!-- JS 動態更新對照數值 -->
+          </div>
+          <p class="text-[10px] text-slate-400 mt-3 text-center">💡 簡單心算法：越南盾「去掉後面3個零，再乘以 1.3」即為約略台幣！</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 4: 預算隨記 ================= -->
+    <div id="tab-budget" class="tab-content hidden space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+        
+        <!-- 總支出卡片 -->
+        <div class="theme-gradient text-slate-800 p-4 rounded-xl shadow-sm mb-4 text-center transition-all duration-500 border border-white/10">
+          <p class="text-xs text-slate-600 font-bold">估計旅程總支出 (已換算台幣)</p>
+          <h3 class="text-2xl font-black mt-1 text-slate-800" id="total-budget-text">NT$ 0</h3>
+          <p class="text-[10px] text-slate-500 font-medium mt-1">越南盾消費會自動依上方設定的匯率折合台幣</p>
+        </div>
+
+        <h2 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">➕ 新增一筆消費紀錄</h2>
+        
+        <!-- 新增預算表單 -->
+        <form id="budget-form" class="space-y-3 bg-slate-50 p-3 rounded-lg border border-slate-100 mb-5">
+          <div class="grid grid-cols-2 gap-2">
+            <input
+              type="text"
+              id="budget-title"
+              placeholder="項目（如：椰子船）"
+              class="px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white"
+              required
+            >
+            <div class="flex space-x-1">
+              <input
+                type="number"
+                id="budget-amount"
+                placeholder="金額"
+                class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white"
+                required
+              >
+              <select
+                id="budget-currency"
+                class="px-1 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white font-bold"
+              >
+                <option value="VND">VND</option>
+                <option value="TWD">TWD</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center space-x-1.5" id="budget-category-selector">
+              <span class="text-xs text-slate-500 font-bold">分類:</span>
+              <!-- JS 動態生成分類按鈕 -->
+            </div>
+            <button
+              type="submit"
+              class="theme-gradient hover:brightness-95 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold active:scale-95 transition-all shadow-sm border border-white/20"
+            >
+              確認記錄
+            </button>
+          </div>
+        </form>
+
+        <!-- 📊 快速分類篩選與查看明細表 -->
+        <div class="border-t border-slate-100 pt-4 mt-2">
+          <div class="flex justify-between items-center mb-2.5">
+            <h3 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider">消費明細表</h3>
+            <!-- 分類小計動態顯示 -->
+            <span id="budget-filter-subtotal" class="text-[11px] font-extrabold theme-color bg-[var(--bg-light)] px-2 py-0.5 rounded-md border theme-border-light transition-all duration-300"></span>
+          </div>
+
+          <!-- 橫向滑動篩選列 -->
+          <div id="budget-filter-selector" class="flex overflow-x-auto space-x-1.5 pb-3 no-scrollbar">
+            <!-- JS 動態生成 -->
+          </div>
+
+          <!-- 消費清單 -->
+          <div class="space-y-2 max-h-64 overflow-y-auto pr-1" id="budget-list-container">
+            <!-- JS 動態生成 -->
+          </div>
+        </div>
+
+        <button
+          id="btn-clear-budget"
+          class="w-full mt-4 py-2.5 text-xs text-red-500 bg-red-50 hover:bg-red-100 rounded-lg font-semibold active:scale-[0.98] transition-all"
+        >
+          清空所有記帳紀錄
+        </button>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 專屬確認懸浮彈窗 (Custom iOS-style Confirmation Modal) -->
+  <div id="custom-confirm-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center hidden px-6">
+    <div class="bg-white rounded-2xl p-5 max-w-xs w-full shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-150">
+      <h3 class="font-bold text-slate-800 text-base mb-1.5 text-center" id="confirm-modal-title">確認操作</h3>
+      <p class="text-xs text-slate-500 mb-5 text-center leading-relaxed" id="confirm-modal-desc">您確定要執行此操作嗎？執行後將無法還原。</p>
+      <div class="flex space-x-2">
+        <button id="confirm-modal-cancel" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-xs transition-colors">
+          取消
+        </button>
+        <button id="confirm-modal-action" class="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl text-xs transition-colors">
+          確認
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部導覽列 (作用中按鈕色也配合主題自動變色) -->
+  <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-slate-100 rounded-t-3xl shadow-lg flex justify-around py-2.5 px-2 z-40">
+    <button onclick="switchTab('itinerary')" id="nav-itinerary" class="nav-btn flex flex-col items-center flex-1 py-1 text-slate-400">
+      <i data-lucide="calendar" class="w-5 h-5 mb-0.5"></i>
+      <span class="text-[10px]">詳細行程</span>
+    </button>
+    <button onclick="switchTab('packing')" id="nav-packing" class="nav-btn flex flex-col items-center flex-1 py-1 text-slate-400">
+      <i data-lucide="briefcase" class="w-5 h-5 mb-0.5"></i>
+      <span class="text-[10px]">打包清單</span>
+    </button>
+    <button onclick="switchTab('converter')" id="nav-converter" class="nav-btn flex flex-col items-center flex-1 py-1 text-slate-400">
+      <i data-lucide="coins" class="w-5 h-5 mb-0.5"></i>
+      <span class="text-[10px]">匯率換算</span>
+    </button>
+    <button onclick="switchTab('budget')" id="nav-budget" class="nav-btn flex flex-col items-center flex-1 py-1 text-slate-400">
+      <i data-lucide="dollar-sign" class="w-5 h-5 mb-0.5"></i>
+      <span class="text-[10px]">預算隨記</span>
+    </button>
+  </nav>
+
+  <!-- ==================== JS 邏輯區域 ==================== -->
+  <script>
+    /***************************************************
+     * 0. 全域預設設定區（超級方便修改！）
+     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780 即可！
+     ***************************************************/
+    const DEFAULT_EXCHANGE_RATE = 780; // 👈 在這裡更改預設台幣對越南盾匯率
+
+    /***************************************************
+     * 1. 詳細行程資料
+     ***************************************************/
+    const itineraryData = [
+      {
+        day: 1,
+        date: "2026/06/19（五）",
+        title: "抵達峴港、市區觀光",
+        summary: "今日重點：銀樓兌換越南盾、預訂好的人氣 Pizza 4P's，以及週五限定的龍橋噴火秀與山茶夜市！",
+        items: [
+          { id: "d1-1", time: "14:40", title: "桃園機場起飛 (CI789)", desc: "於桃園機場第一航廈搭乘中華航空，帶著期待的心情出發！", icon: "✈️", query: "桃園國際機場第一航廈" },
+          { id: "d1-2", time: "16:30", title: "抵達峴港機場", desc: "降落峴港國際機場，準備辦理入境與拿行李。", icon: "🛬", query: "Da Nang International Airport" },
+          { 
+            id: "d1-3", 
+            time: "17:30", 
+            title: "飯店 Check-in", 
+            desc: "前往下榻飯店辦理入住，稍作休息與寄放行李。", 
+            icon: "🏨", 
+            query: "Da Nang Hotel",
+            mapUrl: "https://maps.app.goo.gl/TZC1BHCjuyjxgXPZA?g_st=ic"
+          },
+          { 
+            id: "d1-4", 
+            time: "18:40", 
+            title: "銀樓換錢 (Tiệm Vàng Soạn Hà)", 
+            desc: "位於漢市場附近。建議直接攜帶「台幣千元大鈔」在此兌換，匯率通常最劃算！", 
+            icon: "💵", 
+            query: "Tiệm Vàng Soạn Hà Da Nang",
+            mapUrl: "https://maps.app.goo.gl/9T8ZzK6Q7wB8n8F6A", 
+            important: "記得清點金額再離開櫃台" 
+          },
+          { 
+            id: "d1-5", 
+            time: "20:00", 
+            title: "晚餐：Pizza 4P's Indochina", 
+            desc: "享用知名精緻柴燒比薩（已提前訂位），推薦蟹肉義大利麵與自製起司比薩！", 
+            icon: "🍲", 
+            query: "Pizza 4P's Indochina Da Nang",
+            mapUrl: "https://maps.app.goo.gl/uXfW4pW9Jgq8Vyxv7"
+          },
+          { id: "d1-6", time: "21:00", title: "龍橋噴火吐水秀", desc: "週五、六、日晚上 9 點準時開始！建議提前15分鐘到橋頭或附近河畔卡位，表演持續約20分鐘。", icon: "✨", query: "Dragon Bridge Da Nang" },
+          { id: "d1-7", time: "22:00", title: "逛山茶夜市 (Son Tra Night Market)", desc: "體驗當地夜生活與手工藝品。⚠️防雷警告：夜市的海鮮攤尤其是龍蝦，新鮮度堪憂且價格不透明，不建議在此食用！", icon: "🛍️", query: "Son Tra Night Market", warning: "別吃夜市的龍蝦，容易拉肚子！" }
+        ]
+      },
+      {
+        day: 2,
+        date: "2026/06/20（六）",
+        title: "市區採購、沙灘放鬆與煙火節",
+        summary: "今日重點：大教堂美甲、漢市場大採購、美溪沙灘，以及重頭戲「2026 峴港國際煙火節」！",
+        items: [
+          { id: "d2-1", time: "早上", title: "越共咖啡 (Cộng Cà Phê)", desc: "享用特色早餐，必點招牌「椰奶咖啡」與「綠豆沙椰奶」，香濃消暑！", icon: "🍲", query: "Cộng Cà Phê Da Nang", mapUrl: "https://maps.app.goo.gl/vSg1H9QYhZ8yWwKA9" },
+          { id: "d2-2", time: "09:00", title: "Pink Nail Studio 美甲體驗", desc: "高CP值的越式美甲與保養，放鬆一下旅途的雙手雙腳。", icon: "💆", query: "Pink Nail Studio Da Nang" },
+          { 
+            id: "d2-3", 
+            time: "10:30", 
+            title: "參觀粉紅大教堂 & 周邊逛街", 
+            desc: "超好拍的粉紅大教堂（峴港大教堂）。順道逛逛周邊特色文創小店（如 bubushop、STAR KITCHEN 伴手禮店）。", 
+            icon: "✨", 
+            query: "Da Nang Cathedral",
+            mapUrl: "https://maps.app.goo.gl/3QWjE9Y8LpZ8MvK7A"
+          },
+          { id: "d2-4", time: "11:00", title: "漢市場 (Han Market) 大採購", desc: "推薦「171號攤位」購買好吃的芒果乾、帶皮腰果與綠豆糕。也可以在這裡挑選編織包、奧黛，記得要適度殺價喔！", icon: "🛍️", query: "Han Market Da Nang", important: "記得貨比三家，殺價從6折開始試探" },
+          { id: "d2-5", time: "12:00", title: "午餐：Ăn Thôi Restaurant", desc: "韓國觀光客大力推薦的米其林推薦越南料理，環境乾淨、菜色精緻好入口。", icon: "🍲", query: "Ăn Thôi Restaurant Da Nang" },
+          { 
+            id: "d2-6", 
+            time: "14:00", 
+            title: "Spa 按摩放鬆", 
+            desc: "推薦預約知名 Spa（如 Azit Spa、Nguon Spa 或 Babylon Spa），精油按摩舒緩筋骨。結束後先回飯店換上亮麗泳衣！", 
+            icon: "💆", 
+            recommendUrl: "https://www.bella.tw/articles/travel&foodies/54422/da-nang-spa-massage-guide",
+            recommendTitle: "店家推薦"
+          },
+          { id: "d2-7", time: "16:00", title: "美溪沙灘 (My Khe Beach) 戲水", desc: "被譽為世界最美沙灘之一。在細白沙灘散步、拍照，或在飯店頂樓無邊際泳池暢游。晚餐可在沙灘旁的 My Hanh Seafood 享用海鮮或至 Lounge Beach Bar 小酌。", icon: "🏖️", query: "My Khe Beach Da Nang" },
+          { id: "d2-8", time: "18:30", title: "回飯店盥洗準備", desc: "沖澡並換上舒適的服裝，準備前往煙火大會。", icon: "🏨" },
+          { 
+            id: "d2-9", 
+            time: "19:00", 
+            title: "提早出發前往煙火會場", 
+            desc: "煙火節期間交通管制嚴格，需提早搭車，並做好步行約1公里至「陳興道街（Tran Hung Dao）」主看台的準備。", 
+            icon: "⏱️", 
+            query: "Tran Hung Dao Street Da Nang",
+            mapUrl: "https://maps.app.goo.gl/uCBnfF1n6TRXDnF38?g_st=ic"
+          },
+          { id: "d2-10", time: "20:00", title: "2026 峴港國際煙火節 (德國對澳門)", desc: "欣賞壯麗的夜空花火對決！結束時人潮極多，建議在看台或座位多留 30 分鐘，避開第一波擁擠人流再慢慢散步離開。", icon: "✨", warning: "散場人潮擁擠，請務必結伴同行、注意隨身包包！" }
+        ]
+      },
+      {
+        day: 3,
+        date: "2026/06/21（日）",
+        title: "會安古鎮風情一日遊",
+        summary: "今日重點：搭車前往會安、刺激椰子船、訂製衣服、放水燈以及超美味法國麵包與越式晚餐！",
+        items: [
+          { id: "d3-1", time: "早上", title: "搭乘 Grab 前往會安", desc: "從峴港市區搭乘 Grab 專車前往會安，車程約 40-50 分鐘。", icon: "🚗", query: "Hoi An Ancient Town" },
+          { id: "d3-2", time: "10:00", title: "迦南島桶船/椰子船體驗", desc: "兩人一艘，穿梭在水椰林中，體驗趣味瘋狂旋轉與撒網（可給船夫 2-3 萬越盾小費）。", icon: "✨", query: "Hội An Basket Boat", important: "天氣炎熱，請做好防曬與防蚊準備" },
+          { 
+            id: "d3-3", 
+            time: "11:30", 
+            title: "BeBi 會安訂製衣服與鞋子", 
+            desc: "會安特色之一就是快速手工訂製。可以在此挑選喜歡的棉麻衣、西裝或手工皮鞋，量身打造專屬單品！", 
+            icon: "🛍️", 
+            query: "BeBi Tailor Hoi An",
+            mapUrl: "https://maps.app.goo.gl/CxK8uJTWXPuMKm547?g_st=ic"
+          },
+          { id: "d3-4", time: "12:00", title: "午餐：Pho Xua 會安古鎮店", desc: "高人氣越式餐館，大力推薦他們的招牌牛肉河粉（Pho Bò）與會安高樓麵！", icon: "🍲", query: "Phố Xưa Hội An" },
+          { id: "d3-5", time: "13:00", title: "點心：Bánh Mì Phượng 法國麵包", desc: "名揚國際的經典法國麵包！麵包酥脆、配料豐富，最推經典的「1號餐（綜合口味）」。", icon: "🍲", query: "Bánh Mì Phượng Hoi An" },
+          { id: "d3-6", time: "13:30", title: "Mót Hội An 荷花茶", desc: "古鎮人手一杯的清涼飲品！加入了草本、檸檬草與荷花瓣，清甜解渴、非常消暑。", icon: "🍲", query: "Mót Hội An" },
+          { id: "d3-7", time: "14:00", title: "Lemon Tree Spa 避暑按摩", desc: "午後陽光最毒辣時，安排進 Spa 館按摩歇息，躲避烈日暴曬，徹底放鬆。", icon: "💆", query: "Lemon Tree Spa Hoi An" },
+          { id: "d3-8", time: "15:30", title: "Phê La 奶茶下午茶 & 古鎮漫步", desc: "品嚐時下熱門的 Phê La 手作奶茶，隨後漫步於染上金色餘暉的會安古城，欣賞燈籠逐漸亮起的浪漫畫面。", icon: "✨", query: "Phê La Hội An" },
+          { id: "d3-9", time: "17:30", title: "秋盆河放水燈體驗", desc: "搭乘小木船至河中放許願燈籠，微光閃爍、非常夢幻，是會安必做經典體驗。", icon: "✨", query: "Hoai River Hoi An" },
+          { id: "d3-10", time: "18:00", title: "晚餐：Morning Glory Original", desc: "指標性的會安料理餐廳。推薦白玫瑰、炸雲吞及焦糖豬肉，環境復古優雅。", icon: "🍲", query: "Morning Glory Original Hoi An" },
+          { id: "d3-11", time: "20:00", title: "可選：觀賞「會安印象」大型實景秀", desc: "依疲憊程度決定是否購票觀賞。舞台極為震撼，訴說會安百年港口歷史。", icon: "✨", query: "Hoi An Impression Theme Park" }
+        ]
+      },
+      {
+        day: 4,
+        date: "2026/06/22（一）",
+        title: "巴拿山奇幻仙境一日遊",
+        summary: "今日重點：搭乘最長單軌纜車、朝聖佛手黃金橋、體驗刺激的高速過山車，晚上再回市區掃貨！",
+        items: [
+          { id: "d4-1", time: "白天", title: "巴拿山太陽世界一日遊 (Ba Na Hills)", desc: "搭乘世界紀錄的超長纜車上山！朝聖雲霧繚繞 of 黃金佛手橋、參觀法國村，並排隊體驗上層極具速度感的「高速過山車 (Alpine Coaster)」。", icon: "✨", query: "Sun World Ba Na Hills", important: "山上氣溫較低、天氣多變，建議攜帶薄外套與雨具" },
+          { id: "d4-2", time: "晚上", title: "晚餐：Bếp Cuốn Đà Nẵng", desc: "返回市區，享用榮獲米其林推薦的道地越南烤肉春捲拼盤，用生菜包著烤肉、香草沾醬吃超美味！", icon: "🍲", query: "Bếp Cuốn Đà Nẵng" },
+          { id: "d4-3", time: "飯後", title: "市區小店散步 or 越式洗頭按摩", desc: "飯後散散步，或者尋找一家店體驗「越式洗頭（包含洗臉、敷臉、按摩、採耳）」，消除一日巴拿山的疲憊。", icon: "💆", query: "Da Nang Barber Shop Wash" },
+          { id: "d4-4", time: "稍晚", title: "Go! Da Nang (原 Big C) 超市伴手禮大採購", desc: "在連鎖大超市做最後的伴手禮瘋狂掃貨！必買：Gery 起司餅乾、越南咖啡包、豐盛的調味料等。", icon: "🛍️", query: "Go! Da Nang Supermarket" }
+        ]
+      },
+      {
+        day: 5,
+        date: "2026/06/23（二）",
+        title: "悠閒收心與溫慢生活",
+        summary: "今日重點：享用網美早午餐、市區香氛小店做最後巡禮、依依不捨前往機場返回台灣。",
+        items: [
+          { id: "d5-1", time: "11:00", title: "飯店退房辦理", desc: "整理行李，辦理退房，並可將大件行李暫時寄放在飯店大廳。", icon: "🏨" },
+          { id: "d5-2", time: "12:00", title: "早午餐：Solis Coffee Brunch & Beer", desc: "悠閒享用一份精緻早午餐，再來一杯香濃滑順的越南特產「椰子咖啡」做完美 Ending。", icon: "🍲", query: "Solis Coffee Brunch & Beer Da Nang" },
+          { 
+            id: "d5-3", 
+            time: "下午", 
+            title: "市區小店最後巡禮", 
+            desc: "探訪文青香氛店「taran.」、品嚐義式冰淇淋「Gelato di Matteo」或挑選頂級手工巧克力「Chocolate Corner」送親友。", 
+            icon: "🛍️", 
+            links: [
+              { label: "taran. 香氛店", url: "https://maps.app.goo.gl/uU3eigzNPSn1qYCdA?g_st=ic", icon: "map-pin" },
+              { label: "Gelato di Matteo", url: "https://maps.app.goo.gl/xJfZgKhB7mudLzKg9?g_st=ic", icon: "map-pin" },
+              { label: "Chocolate Corner", url: "https://maps.app.goo.gl/TRtWZb17xgxyjTU56?g_st=ic", icon: "map-pin" }
+            ]
+          },
+          { id: "d5-4", time: "14:30", title: "出發前往峴港機場", desc: "搭車前往峴港國際機場（第二航廈國際航線），建議提早 3 小時抵達辦理退稅、登機手續並逛裝免稅店。", icon: "🛬", query: "Da Nang International Airport Terminal 2" },
+          { id: "d5-5", time: "17:30", title: "搭乘 CI790 班機起飛", desc: "告別美麗的峴港，搭乘華航班機啟程返回台灣。", icon: "✈️" },
+          { id: "d5-6", time: "21:20", title: "抵達台灣桃園機場", desc: "平安降落台灣，結束這趟充實、浪漫又美味的峴港五天四夜美好旅程！", icon: "✈️" }
+        ]
+      }
+    ];
+
+    // 預設打包清單
+    const defaultPackingItems = [
+      { id: "p1", text: "護照（有效期限 6 個月以上）", category: "重要證件", checked: false },
+      { id: "p2", text: "越南電子簽證 (E-Visa) 紙本列印", category: "重要證件", checked: false },
+      { id: "p3", text: "來回機票與飯店訂單 (影本/手機截圖)", category: "重要證件", checked: false },
+      { id: "p4", text: "台幣千元大鈔 (用於銀樓換匯)", category: "金流相關", checked: false },
+      { id: "p5", text: "信用卡 (海外高回饋推薦、開通海外刷卡)", category: "金流相關", checked: false },
+      { id: "p6", text: "網卡 / eSIM (確保網路暢通)", category: "電子產品", checked: false },
+      { id: "p7", text: "手機、行動電源、各種充電線", category: "電子產品", checked: false },
+      { id: "p8", text: "萬國轉接頭 (越南多為雙平頭/雙圓頭)", category: "電子產品", checked: false },
+      { id: "p9", text: "遮陽帽、太陽眼鏡、超強防曬乳", category: "防護防曬", checked: false },
+      { id: "p10", text: "折疊雨傘、輕便雨衣 (巴拿山與午後陣雨備用)", category: "防護防曬", checked: false },
+      { id: "p11", text: "泳衣、泳褲、海灘拖鞋 (美溪沙灘用)", category: "服飾配件", checked: false },
+      { id: "p12", text: "換洗衣物、薄外套 (巴拿山與飛機冷氣防寒)", category: "服飾配件", checked: false },
+      { id: "p13", text: "個人常用藥物、胃腸藥 (吃海鮮夜市必備藥)", category: "醫療衛常", checked: false },
+      { id: "p14", text: "防蚊液 (防蚊液在椰子船行程非常重要)", category: "醫療衛常", checked: false }
+    ];
+
+    // 預設記帳項目
+    const defaultBudgetItems = [
+      { id: "b1", title: "機票 (華航來回)", amount: 12500, category: "交通", currency: "TWD" },
+      { id: "b2", title: "飯店住宿 (4晚)", amount: 8000, category: "住宿", currency: "TWD" },
+      { id: "b3", title: "2026煙火節門票", amount: 1500, category: "門票", currency: "TWD" },
+      { id: "b4", title: "巴拿山一日遊門票(含纜車)", amount: 1200000, category: "門票", currency: "VND" },
+      { id: "b5", title: "銀樓預備換匯現金", amount: 10000, category: "零用現金", currency: "TWD" }
+    ];
+
+    /***************************************************
+     * 2. 狀態管理
+     ***************************************************/
+    let currentTab = 'itinerary';
+    let selectedDay = 1;
+    let completedItems = JSON.parse(localStorage.getItem('danang_completed_items')) || {};
+    let packingItems = JSON.parse(localStorage.getItem('danang_packing_items')) || defaultPackingItems;
+    let budgetList = JSON.parse(localStorage.getItem('danang_budget_items')) || defaultBudgetItems;
+    
+    // 初始化匯率：優先讀取地端，否則使用最上方的預設常數
+    let exchangeRate = parseFloat(localStorage.getItem('danang_exchange_rate')) || DEFAULT_EXCHANGE_RATE;
+    
+    // 讀取/設定主題 (預設是經典藍綠色 "teal")
+    let currentTheme = localStorage.getItem('danang_active_theme') || 'teal';
+    
+    // 目前選擇的新增記帳類別
+    let selectedBudgetCategory = '餐飲';
+
+    // 📊 消費明細篩選分類 (預設全部)
+    let budgetFilterCategory = '全部';
+
+    // 懸浮彈窗回呼函數暫存
+    let activeConfirmCallback = null;
+
+    /***************************************************
+     * 3. 初始載入與初始化
+     ***************************************************/
+    window.onload = function() {
+      // 1. 初始化視覺風格主題
+      setTheme(currentTheme, false);
+
+      // 2. 載入 Lucide Icons
+      lucide.createIcons();
+      
+      // 3. 初始化自訂匯率輸入框
+      document.getElementById('rate-input').value = exchangeRate;
+      document.getElementById('current-rate-text').innerText = exchangeRate;
+
+      // 4. 渲染各分頁
+      daySelectorInit();
+      renderItinerary();
+      renderPackingList();
+      renderBudget();
+      setupEventListeners();
+      
+      // 5. 更新對照表
+      updateQuickConvertTable();
+    };
+
+    function daySelectorInit() {
+      renderDaySelector();
+    }
+
+    /***************************************************
+     * 3.5 🎨 設定並儲存主題 (Theme Changer)
+     ***************************************************/
+    function setTheme(themeName, saveToStorage = true) {
+      currentTheme = themeName;
+      document.body.setAttribute('data-theme', themeName);
+      
+      if (saveToStorage) {
+        localStorage.setItem('danang_active_theme', themeName);
+      }
+      
+      // 更新與主題配色關連的 UI
+      if (document.getElementById('budget-category-selector')) {
+        renderBudget();
+      }
+      
+      // 動態更新當前選取的天數按鈕
+      renderDaySelector();
+      
+      // 更新行程進度
+      renderItinerary();
+    }
+
+    /***************************************************
+     * 4. 懸浮確認彈窗 (Custom Modal UI)
+     ***************************************************/
+    function showCustomConfirm(title, desc, onConfirm) {
+      const modal = document.getElementById('custom-confirm-modal');
+      document.getElementById('confirm-modal-title').innerText = title;
+      document.getElementById('confirm-modal-desc').innerText = desc;
+      
+      modal.classList.remove('hidden');
+      activeConfirmCallback = onConfirm;
+    }
+
+    function closeCustomConfirm() {
+      const modal = document.getElementById('custom-confirm-modal');
+      modal.classList.add('hidden');
+      activeConfirmCallback = null;
+    }
+
+    /***************************************************
+     * 5. 導覽切換 (Tab Switcher)
+     ***************************************************/
+    function switchTab(tabId) {
+      currentTab = tabId;
+      
+      // 隱藏所有分頁內容
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      // 顯示指定分頁
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+      // 更新底部按鈕樣式
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('font-bold');
+        btn.classList.add('text-slate-400');
+        // 清除內建變數配色以防止殘留
+        btn.style.color = '';
+      });
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      activeNav.classList.remove('text-slate-400');
+      // 動態給予底部作用中導覽列對應的主題字體顏色
+      activeNav.style.color = 'var(--primary-color)';
+      activeNav.classList.add('font-bold');
+
+      // 滾動回到頂部
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /***************************************************
+     * 6. TAB 1: 行程渲染邏輯
+     ***************************************************/
+    function renderDaySelector() {
+      const container = document.getElementById('day-selector');
+      container.innerHTML = '';
+      
+      [1, 2, 3, 4, 5].forEach(d => {
+        const isCurrent = d === selectedDay;
+        const btn = document.createElement('button');
+        
+        if (isCurrent) {
+          btn.className = `py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 theme-gradient text-slate-800 shadow-sm font-bold scale-105 border border-white/20`;
+        } else {
+          btn.className = `py-2 rounded-lg flex flex-col items-center transition-all active:scale-95 text-slate-500 hover:bg-slate-50`;
+        }
+        
+        // 檢查該天是否全部行程完成
+        const dayData = itineraryData.find(item => item.day === d);
+        const total = dayData ? dayData.items.length : 0;
+        const completedCount = dayData ? dayData.items.filter(item => completedItems[item.id]).length : 0;
+        const isAllDone = total > 0 && total === completedCount;
+
+        btn.innerHTML = `
+          <span class="text-xs text-inherit">Day</span>
+          <span class="text-base text-inherit font-extrabold">${d}</span>
+          <div class="w-1.5 h-1.5 rounded-full mt-0.5 bg-[var(--bullet-color)]" style="display: ${isAllDone ? 'block' : 'none'}"></div>
+        `;
+        btn.onclick = () => {
+          selectedDay = d;
+          renderDaySelector();
+          renderItinerary();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderItinerary() {
+      const dayData = itineraryData.find(d => d.day === selectedDay);
+      if (!dayData) return;
+
+      // 1. 渲染今日亮點卡片
+      const completedCount = dayData.items.filter(item => completedItems[item.id]).length;
+      const progressPercent = Math.round((completedCount / dayData.items.length) * 100);
+
+      const summaryCard = document.getElementById('day-summary-card');
+      summaryCard.innerHTML = `
+        <div class="flex justify-between items-start mb-1">
+          <span class="text-xs theme-bg-light theme-color px-2.5 py-0.5 rounded-md font-extrabold transition-all duration-300 border theme-border-light">${dayData.date}</span>
+          <span class="text-xs text-slate-400 font-medium">本日完成度: ${progressPercent}%</span>
+        </div>
+        <h2 class="text-base font-extrabold text-slate-800 mb-1.5">Day ${selectedDay}：${dayData.title}</h2>
+        <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+          💡 ${dayData.summary}
+        </p>
+      `;
+
+      // 2. 渲染時間軸清單
+      const timeline = document.getElementById('timeline-container');
+      // 保留垂直導引線
+      timeline.innerHTML = '<div class="absolute left-7 top-4 bottom-4 w-0.5 bg-slate-200"></div>';
+
+      dayData.items.forEach(item => {
+        const isCompleted = !!completedItems[item.id];
+        const card = document.createElement('div');
+        card.className = `relative flex items-start space-x-3 transition-opacity ${isCompleted ? 'opacity-60' : 'opacity-100'}`;
+
+        // 按鈕 HTML 解析 (地圖單一按鈕 或 店家推薦按鈕 或 下方複數按鈕群組)
+        let topRightButtonHtml = '';
+        let bottomLinksHtml = '';
+
+        if (item.links && item.links.length > 0) {
+          // 渲染下方複數按鈕
+          bottomLinksHtml = `<div class="mt-2.5 flex flex-wrap gap-1.5">`;
+          item.links.forEach(link => {
+            bottomLinksHtml += `
+              <button
+                onclick="window.open('${link.url}', '_blank')"
+                class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1.5 rounded-lg flex items-center space-x-1.5 transition-all active:scale-95 border theme-border-light font-extrabold shadow-sm"
+              >
+                <i data-lucide="${link.icon || 'map-pin'}" class="w-3.5 h-3.5 theme-color"></i>
+                <span>${link.label}</span>
+              </button>
+            `;
+          });
+          bottomLinksHtml += `</div>`;
+        } else if (item.recommendUrl) {
+          // 渲染右上單一推薦按鈕
+          topRightButtonHtml = `
+            <button
+              onclick="window.open('${item.recommendUrl}', '_blank')"
+              class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1 rounded-md flex items-center space-x-1 transition-all active:scale-95 border theme-border-light font-extrabold"
+            >
+              <i data-lucide="info" class="w-3 h-3 theme-color"></i>
+              <span>${item.recommendTitle || '店家推薦'}</span>
+            </button>
+          `;
+        } else if (item.mapUrl || item.query) {
+          // 渲染右上單一傳統地圖按鈕
+          const mapActionStr = item.mapUrl 
+            ? `window.open('${item.mapUrl}', '_blank')`
+            : `window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.query)}', '_blank')`;
+          
+          topRightButtonHtml = `
+            <button
+              onclick="${mapActionStr}"
+              class="text-xs text-slate-500 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-md flex items-center space-x-1 transition-colors active:scale-95"
+            >
+              <i data-lucide="map-pin" class="w-3 h-3 text-red-400"></i>
+              <span>${item.mapUrl ? '精確位置' : '地圖'}</span>
+            </button>
+          `;
+        }
+
+        // 重要提示與警告 HTML
+        let alertHtml = '';
+        if (item.warning) {
+          alertHtml = `
+            <div class="mt-2 flex items-start space-x-1 bg-red-50 border border-red-100 text-red-700 p-2 rounded-lg text-[11px] font-medium animate-pulse">
+              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0 text-red-500 mt-0.5"></i>
+              <span>${item.warning}</span>
+            </div>
+          `;
+        } else if (item.important) {
+          alertHtml = `
+            <div class="mt-2 flex items-start space-x-1 bg-amber-50 border border-amber-100 text-amber-700 p-2 rounded-lg text-[11px] font-medium">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 shrink-0 text-amber-500 mt-0.5"></i>
+              <span>${item.important}</span>
+            </div>
+          `;
+        }
+
+        // 用動態產生的圓圈圖標配合主題色
+        const checkIcon = isCompleted 
+          ? `<i data-lucide="check-circle-2" class="w-6 h-6 theme-color fill-slate-50"></i>` 
+          : `<i data-lucide="circle" class="w-6 h-6 text-slate-300 hover:text-[var(--primary-color)]"></i>`;
+
+        card.innerHTML = `
+          <!-- 勾選圓圈 -->
+          <button 
+            onclick="toggleItineraryComplete('${item.id}')"
+            class="mt-1.5 z-10 bg-white rounded-full transition-transform active:scale-95 focus:outline-none"
+          >
+            ${checkIcon}
+          </button>
+
+          <!-- 行程詳細卡片 -->
+          <div class="flex-1 bg-white p-3.5 rounded-2xl shadow-sm border border-slate-100 relative group hover:border-[var(--primary-color)] transition-colors">
+            <div class="flex items-center justify-between mb-1.5">
+              <div class="flex items-center space-x-1.5">
+                <i data-lucide="clock" class="w-3.5 h-3.5 theme-color"></i>
+                <span class="text-sm font-extrabold theme-color">${item.time}</span>
+                <span class="ml-1.5 inline-block text-base">${item.icon || '📍'}</span>
+              </div>
+              ${topRightButtonHtml}
+            </div>
+
+            <h3 class="font-extrabold text-slate-800 text-sm ${isCompleted ? 'line-through text-slate-400' : ''}">
+              ${item.title}
+            </h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              ${item.desc}
+            </p>
+            ${bottomLinksHtml}
+            ${alertHtml}
+          </div>
+        `;
+
+        timeline.appendChild(card);
+      });
+
+      // 重新生成渲染出來的圖標
+      lucide.createIcons();
+    }
+
+    function toggleItineraryComplete(id) {
+      completedItems[id] = !completedItems[id];
+      localStorage.setItem('danang_completed_items', JSON.stringify(completedItems));
+      
+      // 更新天數選擇點點與行程渲染
+      renderDaySelector();
+      renderItinerary();
+    }
+
+
+    /***************************************************
+     * 7. TAB 2: 行季清單打包邏輯
+     ***************************************************/
+    function renderPackingList() {
+      const container = document.getElementById('packing-list-container');
+      container.innerHTML = '';
+
+      // 取得所有行李分類
+      const categories = Array.from(new Set(packingItems.map(item => item.category)));
+
+      categories.forEach(category => {
+        const catBox = document.createElement('div');
+        catBox.className = 'mb-4';
+        
+        catBox.innerHTML = `
+          <h3 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2 bg-slate-50 px-2 py-1 rounded">
+            ${category}
+          </h3>
+          <div class="space-y-1.5" id="cat-items-${category}"></div>
+        `;
+        container.appendChild(catBox);
+
+        const itemsBox = document.getElementById(`cat-items-${category}`);
+        
+        packingItems.filter(item => item.category === category).forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all text-xs';
+          
+          const iconPack = item.checked 
+            ? `<i data-lucide="check-circle-2" class="w-4 h-4 theme-color shrink-0"></i>` 
+            : `<i data-lucide="circle" class="w-4 h-4 text-slate-300 shrink-0"></i>`;
+
+          itemDiv.innerHTML = `
+            <button 
+              onclick="togglePackingCheck('${item.id}')"
+              class="flex items-center space-x-2 text-slate-700 text-left flex-1"
+            >
+              ${iconPack}
+              <span class="${item.checked ? 'line-through text-slate-400' : 'font-medium'}">
+                ${item.text}
+              </span>
+            </button>
+            ${item.id.includes('custom') 
+              ? `<button onclick="deletePackingItem('${item.id}')" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`
+              : ''
+            }
+          `;
+          itemsBox.appendChild(itemDiv);
+        });
+      });
+
+      lucide.createIcons();
+    }
+
+    function togglePackingCheck(id) {
+      packingItems = packingItems.map(item => 
+        item.id === id ? { ...item, checked: !item.checked } : item
+      );
+      localStorage.setItem('danang_packing_items', JSON.stringify(packingItems));
+      renderPackingList();
+    }
+
+    function addPackingItem(text) {
+      const newItem = {
+        id: "p-custom-" + Date.now(),
+        text: text,
+        category: "自訂項目",
+        checked: false
+      };
+      packingItems.push(newItem);
+      localStorage.setItem('danang_packing_items', JSON.stringify(packingItems));
+      renderPackingList();
+    }
+
+    function deletePackingItem(id) {
+      packingItems = packingItems.filter(item => item.id !== id);
+      localStorage.setItem('danang_packing_items', JSON.stringify(packingItems));
+      renderPackingList();
+    }
+
+    function resetPackingStatus() {
+      showCustomConfirm("重置行李狀態", "確認要清空並重置所有行李的打勾狀態嗎？", () => {
+        packingItems = packingItems.map(item => ({ ...item, checked: false }));
+        localStorage.setItem('danang_packing_items', JSON.stringify(packingItems));
+        renderPackingList();
+      });
+    }
+
+
+    /***************************************************
+     * 8. TAB 3: 匯率換算邏輯
+     ***************************************************/
+    function handleTwdChange(value) {
+      const twdInput = document.getElementById('twd-input');
+      const vndInput = document.getElementById('vnd-input');
+      twdInput.value = value;
+      if (!isNaN(value) && value !== '') {
+        vndInput.value = Math.round(parseFloat(value) * exchangeRate);
+      } else {
+        vndInput.value = '';
+      }
+    }
+
+    function handleVndChange(value) {
+      const twdInput = document.getElementById('twd-input');
+      const vndInput = document.getElementById('vnd-input');
+      vndInput.value = value;
+      if (!isNaN(value) && value !== '') {
+        twdInput.value = Math.round(parseFloat(value) / exchangeRate);
+      } else {
+        twdInput.value = '';
+      }
+    }
+
+    function updateQuickConvertTable() {
+      const table = document.getElementById('quick-convert-table');
+      table.innerHTML = '';
+      
+      const sizes = [20000, 50000, 100000, 200000, 500000, 1000000];
+      sizes.forEach(vndVal => {
+        const twdVal = Math.round(vndVal / exchangeRate);
+        const item = document.createElement('div');
+        item.className = 'flex justify-between p-2.5 bg-slate-50 rounded border border-slate-100';
+        item.innerHTML = `
+          <span class="font-semibold text-slate-700">${vndVal.toLocaleString()} ₫</span>
+          <span class="theme-color font-bold">≈ NT$ ${twdVal}</span>
+        `;
+        table.appendChild(item);
+      });
+    }
+
+
+    /***************************************************
+     * 9. TAB 4: 記帳預算與分類篩選邏輯
+     ***************************************************/
+    function renderBudget() {
+      // 1. 渲染「新增消費」的分類選取鈕 (在表單內)
+      const categories = ['餐飲', '交通', '住宿', '門票', '美甲Spa', '購物', '其他'];
+      const catSelector = document.getElementById('budget-category-selector');
+      catSelector.innerHTML = '<span class="text-xs text-slate-500 font-bold">分類:</span>';
+      
+      categories.forEach(cat => {
+        const isSelected = cat === selectedBudgetCategory;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        
+        if (isSelected) {
+          btn.className = `px-2 py-0.5 rounded text-[10px] font-extrabold transition-all border text-slate-800 shadow-sm`;
+          btn.style.background = 'var(--primary-gradient)';
+          btn.style.borderColor = 'var(--primary-color)';
+        } else {
+          btn.className = `px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-white text-slate-500 hover:bg-slate-100 border border-slate-200`;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+        }
+        
+        btn.innerText = cat;
+        btn.onclick = () => {
+          selectedBudgetCategory = cat;
+          renderBudget();
+        };
+        catSelector.appendChild(btn);
+      });
+
+      // 2. 🌟 渲染「明細表篩選分類列」(橫向滾動)
+      const filterSelector = document.getElementById('budget-filter-selector');
+      filterSelector.innerHTML = '';
+      
+      const filterCategories = ['全部', ...categories];
+      filterCategories.forEach(cat => {
+        const isSelected = cat === budgetFilterCategory;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        
+        if (isSelected) {
+          btn.className = `px-3 py-1 rounded-full text-xs font-extrabold transition-all border text-slate-800 shadow-sm shrink-0`;
+          btn.style.background = 'var(--primary-gradient)';
+          btn.style.borderColor = 'var(--primary-color)';
+        } else {
+          btn.className = `px-3 py-1 rounded-full text-xs font-semibold transition-all bg-white text-slate-500 hover:bg-slate-100 border border-slate-200 shrink-0`;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+        }
+        
+        btn.innerText = cat;
+        btn.onclick = () => {
+          budgetFilterCategory = cat;
+          renderBudget();
+        };
+        filterSelector.appendChild(btn);
+      });
+
+      // 3. 計算總支出 (不分分類，頂部卡片專用)
+      const totalTwd = budgetList.reduce((acc, curr) => {
+        if (curr.currency === 'TWD') {
+          return acc + curr.amount;
+        } else {
+          return acc + (curr.amount / exchangeRate);
+        }
+      }, 0);
+      document.getElementById('total-budget-text').innerText = `NT$ ${Math.round(totalTwd).toLocaleString()}`;
+
+      // 4. 🌟 依分類篩選預算明細並計算小計
+      const filteredList = budgetFilterCategory === '全部'
+        ? budgetList
+        : budgetList.filter(item => item.category === budgetFilterCategory);
+
+      const filteredTwd = filteredList.reduce((acc, curr) => {
+        if (curr.currency === 'TWD') {
+          return acc + curr.amount;
+        } else {
+          return acc + (curr.amount / exchangeRate);
+        }
+      }, 0);
+
+      // 更新篩選小計文字
+      const subtotalLabel = budgetFilterCategory === '全部' ? '總花費' : `${budgetFilterCategory}小計`;
+      document.getElementById('budget-filter-subtotal').innerText = `${subtotalLabel}: NT$ ${Math.round(filteredTwd).toLocaleString()}`;
+
+      // 5. 渲染明細清單
+      const listContainer = document.getElementById('budget-list-container');
+      listContainer.innerHTML = '';
+
+      if (filteredList.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center text-xs text-slate-400 py-8 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+            此分類目前沒有消費紀錄
+          </div>`;
+        return;
+      }
+
+      filteredList.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'flex justify-between items-center p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs border border-slate-100 transition-colors duration-150';
+        
+        const estTwd = item.currency === 'VND' 
+          ? `約折合 NT$ ${Math.round(item.amount / exchangeRate)}` 
+          : '台幣直接計價';
+
+        div.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <span class="px-1.5 py-0.5 text-[9px] bg-white text-slate-600 font-extrabold rounded-md border border-slate-200">
+                ${item.category}
+              </span>
+              <span class="font-extrabold text-slate-800">${item.title}</span>
+            </div>
+            <span class="text-[10px] text-slate-400 block mt-0.5 font-medium">${estTwd}</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="font-extrabold text-slate-800">
+              ${item.currency === 'TWD' ? 'NT$' : '₫'} ${item.amount.toLocaleString()}
+            </span>
+            <button onclick="deleteBudgetItem('${item.id}')" class="text-slate-300 hover:text-red-500 p-1 active:scale-90 transition-transform">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+        listContainer.appendChild(div);
+      });
+
+      lucide.createIcons();
+    }
+
+    function addBudgetItem(title, amount, currency) {
+      const newItem = {
+        id: "b-" + Date.now(),
+        title: title,
+        amount: parseFloat(amount),
+        category: selectedBudgetCategory,
+        currency: currency
+      };
+      budgetList.unshift(newItem); // 新記錄排最前面
+      localStorage.setItem('danang_budget_items', JSON.stringify(budgetList));
+      
+      // 新增成功後，自動將篩選切換回全部，以便查看最新一筆消費
+      budgetFilterCategory = '全部';
+      renderBudget();
+    }
+
+    function deleteBudgetItem(id) {
+      budgetList = budgetList.filter(item => item.id !== id);
+      localStorage.setItem('danang_budget_items', JSON.stringify(budgetList));
+      renderBudget();
+    }
+
+    function clearAllBudgets() {
+      showCustomConfirm("清空預算紀錄", "確認要清空所有已記帳的花費紀錄嗎？", () => {
+        budgetList = [];
+        localStorage.setItem('danang_budget_items', JSON.stringify(budgetList));
+        renderBudget();
+      });
+    }
+
+
+    /***************************************************
+     * 10. DOM 事件綁定監聽
+     ***************************************************/
+    function setupEventListeners() {
+      // 1. 行李表單提交
+      document.getElementById('packing-form').onsubmit = function(e) {
+        e.preventDefault();
+        const input = document.getElementById('packing-input');
+        if (input.value.trim()) {
+          addPackingItem(input.value.trim());
+          input.value = '';
+        }
+      };
+
+      // 2. 自訂匯率輸入框
+      document.getElementById('rate-input').oninput = function(e) {
+        const val = parseFloat(e.target.value);
+        if (val && val > 0) {
+          exchangeRate = val;
+          localStorage.setItem('danang_exchange_rate', exchangeRate);
+          document.getElementById('current-rate-text').innerText = exchangeRate;
+          
+          // 重新換算當前台幣輸入值
+          const twdVal = document.getElementById('twd-input').value;
+          handleTwdChange(twdVal);
+          
+          // 更新對照表與預算總結
+          updateQuickConvertTable();
+          renderBudget();
+        }
+      };
+
+      // 3. 匯率雙向輸入
+      document.getElementById('twd-input').oninput = function(e) {
+        handleTwdChange(e.target.value);
+      };
+      document.getElementById('vnd-input').oninput = function(e) {
+        handleVndChange(e.target.value);
+      };
+
+      // 4. 新增預算表單提交
+      document.getElementById('budget-form').onsubmit = function(e) {
+        e.preventDefault();
+        const title = document.getElementById('budget-title');
+        const amount = document.getElementById('budget-amount');
+        const currency = document.getElementById('budget-currency');
+
+        if (title.value.trim() && amount.value) {
+          addBudgetItem(title.value.trim(), amount.value, currency.value);
+          title.value = '';
+          amount.value = '';
+        }
+      };
+
+      // 5. 綁定自訂確認懸浮窗的按鈕
+      document.getElementById('confirm-modal-cancel').onclick = closeCustomConfirm;
+      document.getElementById('confirm-modal-action').onclick = function() {
+        if (activeConfirmCallback) {
+          activeConfirmCallback();
+        }
+        closeCustomConfirm();
+      };
+
+      // 6. 綁定觸發自訂確認窗按鈕
+      document.getElementById('btn-reset-packing').onclick = resetPackingStatus;
+      document.getElementById('btn-clear-budget').onclick = clearAllBudgets;
+    }
+  </script>
+</body>
+</html>
