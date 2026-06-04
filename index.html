@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -7,8 +6,8 @@
   <title>峴港互動旅伴</title>
   
   <!-- =================📱 iOS Safari 加入主畫面專屬美化設定 ================= -->
-  <!-- 桌面圖示：高相容性的 512x512 高解析度莫蘭迪粉嫩「椰子樹度假小島 🏝️」PNG 圖片 -->
-  <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/512x512/1f3dd.png">
+  <!-- 桌面圖示：使用相對路徑，只要將圖片上傳至 GitHub 與 index.html 同資料夾即可 🏝️ -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   
   <!-- 允許網頁以 全螢幕 App 模式 執行 (隱藏 Safari 網址列與底部導航欄) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -412,9 +411,9 @@
   <script>
     /***************************************************
      * 0. 全域預設設定區
-     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780.00 即可！
+     * 💡 如果您想永久修改預設匯率，只需直接修改下方的 839.60 即可！
      ***************************************************/
-    const DEFAULT_EXCHANGE_RATE = 834.56; // 👈 預設台幣對越南盾匯率
+    const DEFAULT_EXCHANGE_RATE = 839.60; // 👈 預設台幣對越南盾匯率
 
     /***************************************************
      * 1. 詳細行程資料
@@ -516,8 +515,14 @@
             title: "BeBi 會安訂製衣服與鞋子", 
             desc: "會安特色之一就是快速手工訂製。可以在此挑選喜歡的棉麻衣、西裝或手工皮鞋，量身打造專屬單品！", 
             icon: "🛍️", 
-            query: "BeBi Tailor Hoi An",
-            mapUrl: "https://maps.app.goo.gl/CxK8uJTWXPuMKm547?g_st=ic"
+            // 💡 已幫您成功擴充為「多重店家地圖連結群組」
+            links: [
+              { label: "Be Bi Leather", url: "https://maps.app.goo.gl/x2g5QgDx9qW59oy37", icon: "map-pin" },
+              { label: "Blue Eye", url: "https://maps.app.goo.gl/w7u37KHs4Da1UCdC8", icon: "map-pin" },
+              { label: "Rihanna", url: "https://maps.app.goo.gl/r5swZ4J5G2kCs6jTA", icon: "map-pin" },
+              { label: "Như May Fashion Shop", url: "https://maps.app.goo.gl/ctqhjs9LNZ8wpM9J9", icon: "map-pin" },
+              { label: "Chiba Boutique", url: "https://maps.app.goo.gl/KveePbJnSZVPkFXv5", icon: "map-pin" }
+            ]
           },
           { id: "d3-4", time: "12:00", title: "午餐：Pho Xua 會安古鎮店", desc: "高人氣越式餐館，大力推薦他們的招牌牛肉河粉（Pho Bò）與會安高樓麵！", icon: "🍲", query: "Phố Xưa Hội An" },
           { id: "d3-5", time: "13:00", title: "點心：Bánh Mì Phượng 法國麵包", desc: "名揚國際的經典法國麵包！麵包酥脆、配料豐富，最推經典的「1號餐（綜合口味）」。", icon: "🍲", query: "Bánh Mì Phượng Hoi An" },
@@ -596,16 +601,15 @@
     ];
 
     /***************************************************
-     * 2. 狀態管理 (引入防當機安全機制)
+     * 2. 狀態管理
      ***************************************************/
     let currentTab = 'itinerary';
     let selectedDay = 1;
-    
     let completedItems = {};
     try {
       completedItems = JSON.parse(localStorage.getItem('danang_completed_items')) || {};
     } catch (e) {
-      console.error("無法剖析行程完成紀錄，已自動重設。", e);
+      console.error(e);
       completedItems = {};
     }
 
@@ -616,7 +620,7 @@
         packingItems = JSON.parse(savedPacking);
       }
     } catch (e) {
-      console.error("無法剖析行李打包紀錄，已重設為預設值。", e);
+      console.error(e);
       packingItems = defaultPackingItems;
     }
 
@@ -627,7 +631,7 @@
         budgetList = JSON.parse(savedBudget);
       }
     } catch (e) {
-      console.error("無法剖析消費記帳紀錄，已重設為預設值。", e);
+      console.error(e);
       budgetList = defaultBudgetItems;
     }
     
@@ -743,7 +747,7 @@
     }
 
     /***************************************************
-     * 6. TAB 1: 行程渲染邏輯 (徹底清除了任何轉譯反斜線)
+     * 6. TAB 1: 行程渲染邏輯
      ***************************************************/
     function renderDaySelector() {
       const container = document.getElementById('day-selector');
@@ -801,6 +805,7 @@
 
       // 2. 渲染時間軸行程清單
       const timeline = document.getElementById('timeline-container');
+      // 時間軸垂直引導線
       timeline.innerHTML = '<div class="absolute left-7 top-4 bottom-4 w-0.5 bg-slate-200"></div>';
 
       dayData.items.forEach(item => {
@@ -830,7 +835,7 @@
           topRightButtonHtml = `
             <button
               onclick="window.open('${item.recommendUrl}', '_blank')"
-              class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1 rounded-md flex items-center space-x-1 transition-all active:scale-95 border theme-border-light font-extrabold"
+              class="text-xs theme-color theme-bg-light hover:brightness-95 px-2.5 py-1.5 rounded-md flex items-center space-x-1 transition-all active:scale-95 border theme-border-light font-extrabold"
             >
               <i data-lucide="info" class="w-3 h-3 theme-color"></i>
               <span>${item.recommendTitle || '店家推薦'}</span>
@@ -852,7 +857,7 @@
           `;
         }
 
-        // 重要提示與警告 HTML
+        // 提醒與警告 HTML
         let alertHtml = '';
         if (item.warning) {
           alertHtml = `
@@ -920,7 +925,7 @@
 
 
     /***************************************************
-     * 7. TAB 2: 行李清單打包邏輯
+     * 7. TAB 2: 行李打包
      ***************************************************/
     function renderPackingList() {
       const container = document.getElementById('packing-list-container');
@@ -1008,7 +1013,7 @@
 
 
     /***************************************************
-     * 8. TAB 3: 匯率換算邏輯
+     * 8. TAB 3: 匯率換算
      ***************************************************/
     function handleTwdChange(value) {
       const twdInput = document.getElementById('twd-input');
@@ -1051,7 +1056,7 @@
 
 
     /***************************************************
-     * 9. TAB 4: 記帳預算與分類篩選邏輯
+     * 9. TAB 4: 預算隨記
      ***************************************************/
     function renderBudget() {
       // 1. 渲染「新增消費」的分類選取鈕
@@ -1082,7 +1087,7 @@
         catSelector.appendChild(btn);
       });
 
-      // 2. 渲染「明細表篩選分類列」(橫向滾動)
+      // 2. 渲染篩選分類列
       const filterSelector = document.getElementById('budget-filter-selector');
       filterSelector.innerHTML = '';
       
@@ -1120,7 +1125,7 @@
       }, 0);
       document.getElementById('total-budget-text').innerText = `NT$ ${totalTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-      // 4. 依分類篩選預算明細並計算小計
+      // 4. 依分類篩選預算並計算小計
       const filteredList = budgetFilterCategory === '全部'
         ? budgetList
         : budgetList.filter(item => item.category === budgetFilterCategory);
@@ -1133,7 +1138,6 @@
         }
       }, 0);
 
-      // 更新篩選小計文字
       const subtotalLabel = budgetFilterCategory === '全部' ? '總花費' : `${budgetFilterCategory}小計`;
       document.getElementById('budget-filter-subtotal').innerText = `${subtotalLabel}: NT$ ${filteredTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
@@ -1225,7 +1229,7 @@
         }
       };
 
-      // 2. 自訂匯率輸入框 (支援精確小數)
+      // 2. 自訂匯率輸入框
       document.getElementById('rate-input').oninput = function(e) {
         const val = parseFloat(e.target.value);
         if (val && val > 0) {
