@@ -198,19 +198,20 @@
         </h2>
         <p class="text-xs text-slate-500 mb-4">即時雙向計算，買東西不怕算錯位數！</p>
 
-        <!-- 匯率自訂 -->
+        <!-- 匯率自訂 (支援小數點後兩位) -->
         <div class="theme-bg-light p-3 rounded-lg border theme-border-light mb-4 text-xs transition-colors duration-300">
           <div class="flex justify-between items-center mb-2">
             <span class="font-semibold text-slate-600">目前匯率：</span>
-            <span class="theme-color font-bold">1 台幣 (TWD) ≈ <span id="current-rate-text">834.89</span> 越南盾 (VND)</span>
+            <span class="theme-color font-bold">1 台幣 (TWD) ≈ <span id="current-rate-text">780.00</span> 越南盾 (VND)</span>
           </div>
           <div class="flex items-center space-x-2">
             <label class="text-slate-500 font-medium">自訂匯率：1 TWD = </label>
             <input
               type="number"
               id="rate-input"
-              value="780"
-              class="w-20 px-2 py-1 border border-slate-200 rounded text-center focus:outline-none theme-color font-extrabold bg-white"
+              value="780.00"
+              step="0.01"
+              class="w-24 px-2 py-1 border border-slate-200 rounded text-center focus:outline-none theme-color font-extrabold bg-white"
             >
             <span class="text-slate-500 font-medium">VND</span>
           </div>
@@ -225,7 +226,8 @@
               <input
                 type="number"
                 id="twd-input"
-                value="1000"
+                value="1000.00"
+                step="0.01"
                 placeholder="輸入台幣金額"
                 class="w-full bg-white px-3 py-2 text-base font-bold border border-slate-200 rounded-lg focus:outline-none"
               >
@@ -245,7 +247,8 @@
               <input
                 type="number"
                 id="vnd-input"
-                value="780000"
+                value="780000.00"
+                step="0.01"
                 placeholder="輸入越南盾金額"
                 class="w-full bg-white px-3 py-2 text-base font-bold border border-slate-200 rounded-lg focus:outline-none"
               >
@@ -271,7 +274,7 @@
         <!-- 總支出卡片 -->
         <div class="theme-gradient text-slate-800 p-4 rounded-xl shadow-sm mb-4 text-center transition-all duration-500 border border-white/10">
           <p class="text-xs text-slate-600 font-bold">估計旅程總支出 (已換算台幣)</p>
-          <h3 class="text-2xl font-black mt-1 text-slate-800" id="total-budget-text">NT$ 0</h3>
+          <h3 class="text-2xl font-black mt-1 text-slate-800" id="total-budget-text">NT$ 0.00</h3>
           <p class="text-[10px] text-slate-500 font-medium mt-1">越南盾消費會自動依上方設定的匯率折合台幣</p>
         </div>
 
@@ -291,6 +294,7 @@
               <input
                 type="number"
                 id="budget-amount"
+                step="0.01"
                 placeholder="金額"
                 class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white"
                 required
@@ -366,7 +370,7 @@
     </div>
   </div>
 
-  <!-- 底部導覽列 (作用中按鈕色也配合主題自動變色) -->
+  <!-- 底部導覽列 -->
   <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-slate-100 rounded-t-3xl shadow-lg flex justify-around py-2.5 px-2 z-40">
     <button onclick="switchTab('itinerary')" id="nav-itinerary" class="nav-btn flex flex-col items-center flex-1 py-1 text-slate-400">
       <i data-lucide="calendar" class="w-5 h-5 mb-0.5"></i>
@@ -389,10 +393,10 @@
   <!-- ==================== JS 邏輯區域 ==================== -->
   <script>
     /***************************************************
-     * 0. 全域預設設定區（超級方便修改！）
+     * 0. 全域預設設定區
      * 💡 如果您想永久修改預設匯率，只需直接修改下方的 780 即可！
      ***************************************************/
-    const DEFAULT_EXCHANGE_RATE = 780; // 👈 在這裡更改預設台幣對越南盾匯率
+    const DEFAULT_EXCHANGE_RATE = 780.00; // 👈 預設台幣對越南盾匯率，已支援小數點後兩位
 
     /***************************************************
      * 1. 詳細行程資料
@@ -513,7 +517,7 @@
         title: "巴拿山奇幻仙境一日遊",
         summary: "今日重點：搭乘最長單軌纜車、朝聖佛手黃金橋、體驗刺激的高速過山車，晚上再回市區掃貨！",
         items: [
-          { id: "d4-1", time: "白天", title: "巴拿山太陽世界一日遊 (Ba Na Hills)", desc: "搭乘世界紀錄的超長纜車上山！朝聖雲霧繚繞 of 黃金佛手橋、參觀法國村，並排隊體驗上層極具速度感的「高速過山車 (Alpine Coaster)」。", icon: "✨", query: "Sun World Ba Na Hills", important: "山上氣溫較低、天氣多變，建議攜帶薄外套與雨具" },
+          { id: "d4-1", time: "白天", title: "巴拿山太陽世界一日遊 (Ba Na Hills)", desc: "搭乘世界紀錄的超長纜車上山！朝聖雲霧繚繞的「黃金佛手橋」、參觀法國村，並排隊體驗上層極具速度感的「高速過山車 (Alpine Coaster)」。", icon: "✨", query: "Sun World Ba Na Hills", important: "山上氣溫較低、天氣多變，建議攜帶薄外套與雨具" },
           { id: "d4-2", time: "晚上", title: "晚餐：Bếp Cuốn Đà Nẵng", desc: "返回市區，享用榮獲米其林推薦的道地越南烤肉春捲拼盤，用生菜包著烤肉、香草沾醬吃超美味！", icon: "🍲", query: "Bếp Cuốn Đà Nẵng" },
           { id: "d4-3", time: "飯後", title: "市區小店散步 or 越式洗頭按摩", desc: "飯後散散步，或者尋找一家店體驗「越式洗頭（包含洗臉、敷臉、按摩、採耳）」，消除一日巴拿山的疲憊。", icon: "💆", query: "Da Nang Barber Shop Wash" },
           { id: "d4-4", time: "稍晚", title: "Go! Da Nang (原 Big C) 超市伴手禮大採購", desc: "在連鎖大超市做最後的伴手禮瘋狂掃貨！必買：Gery 起司餅乾、越南咖啡包、豐盛的調味料等。", icon: "🛍️", query: "Go! Da Nang Supermarket" }
@@ -566,11 +570,11 @@
 
     // 預設記帳項目
     const defaultBudgetItems = [
-      { id: "b1", title: "機票 (華航來回)", amount: 12500, category: "交通", currency: "TWD" },
-      { id: "b2", title: "飯店住宿 (4晚)", amount: 8000, category: "住宿", currency: "TWD" },
-      { id: "b3", title: "2026煙火節門票", amount: 1500, category: "門票", currency: "TWD" },
-      { id: "b4", title: "巴拿山一日遊門票(含纜車)", amount: 1200000, category: "門票", currency: "VND" },
-      { id: "b5", title: "銀樓預備換匯現金", amount: 10000, category: "零用現金", currency: "TWD" }
+      { id: "b1", title: "機票 (華航來回)", amount: 12500.00, category: "交通", currency: "TWD" },
+      { id: "b2", title: "飯店住宿 (4晚)", amount: 8000.00, category: "住宿", currency: "TWD" },
+      { id: "b3", title: "2026煙火節門票", amount: 1500.00, category: "門票", currency: "TWD" },
+      { id: "b4", title: "巴拿山一日遊門票(含纜車)", amount: 1200000.00, category: "門票", currency: "VND" },
+      { id: "b5", title: "銀樓預備換匯現金", amount: 10000.00, category: "零用現金", currency: "TWD" }
     ];
 
     /***************************************************
@@ -608,8 +612,8 @@
       lucide.createIcons();
       
       // 3. 初始化自訂匯率輸入框
-      document.getElementById('rate-input').value = exchangeRate;
-      document.getElementById('current-rate-text').innerText = exchangeRate;
+      document.getElementById('rate-input').value = exchangeRate.toFixed(2);
+      document.getElementById('current-rate-text').innerText = exchangeRate.toFixed(2);
 
       // 4. 渲染各分頁
       daySelectorInit();
@@ -762,7 +766,7 @@
         const card = document.createElement('div');
         card.className = `relative flex items-start space-x-3 transition-opacity ${isCompleted ? 'opacity-60' : 'opacity-100'}`;
 
-        // 按鈕 HTML 解析 (地圖單一按鈕 或 店家推薦按鈕 或 下方複數按鈕群組)
+        // 按鈕 HTML 解析
         let topRightButtonHtml = '';
         let bottomLinksHtml = '';
 
@@ -827,7 +831,6 @@
           `;
         }
 
-        // 用動態產生的圓圈圖標配合主題色
         const checkIcon = isCompleted 
           ? `<i data-lucide="check-circle-2" class="w-6 h-6 theme-color fill-slate-50"></i>` 
           : `<i data-lucide="circle" class="w-6 h-6 text-slate-300 hover:text-[var(--primary-color)]"></i>`;
@@ -866,28 +869,24 @@
         timeline.appendChild(card);
       });
 
-      // 重新生成渲染出來的圖標
       lucide.createIcons();
     }
 
     function toggleItineraryComplete(id) {
       completedItems[id] = !completedItems[id];
       localStorage.setItem('danang_completed_items', JSON.stringify(completedItems));
-      
-      // 更新天數選擇點點與行程渲染
       renderDaySelector();
       renderItinerary();
     }
 
 
     /***************************************************
-     * 7. TAB 2: 行季清單打包邏輯
+     * 7. TAB 2: 行李清單打包邏輯
      ***************************************************/
     function renderPackingList() {
       const container = document.getElementById('packing-list-container');
       container.innerHTML = '';
 
-      // 取得所有行李分類
       const categories = Array.from(new Set(packingItems.map(item => item.category)));
 
       categories.forEach(category => {
@@ -970,14 +969,15 @@
 
 
     /***************************************************
-     * 8. TAB 3: 匯率換算邏輯
+     * 8. TAB 3: 匯率換算邏輯 (小數點後兩位高精準計算)
      ***************************************************/
     function handleTwdChange(value) {
       const twdInput = document.getElementById('twd-input');
       const vndInput = document.getElementById('vnd-input');
       twdInput.value = value;
       if (!isNaN(value) && value !== '') {
-        vndInput.value = Math.round(parseFloat(value) * exchangeRate);
+        // 台幣轉換成越南盾：保留兩位小數計算
+        vndInput.value = (parseFloat(value) * exchangeRate).toFixed(2);
       } else {
         vndInput.value = '';
       }
@@ -988,7 +988,8 @@
       const vndInput = document.getElementById('vnd-input');
       vndInput.value = value;
       if (!isNaN(value) && value !== '') {
-        twdInput.value = Math.round(parseFloat(value) / exchangeRate);
+        // 越南盾轉換成台幣：保留兩位小數精確呈現
+        twdInput.value = (parseFloat(value) / exchangeRate).toFixed(2);
       } else {
         twdInput.value = '';
       }
@@ -1000,12 +1001,12 @@
       
       const sizes = [20000, 50000, 100000, 200000, 500000, 1000000];
       sizes.forEach(vndVal => {
-        const twdVal = Math.round(vndVal / exchangeRate);
+        const twdVal = (vndVal / exchangeRate).toFixed(2);
         const item = document.createElement('div');
         item.className = 'flex justify-between p-2.5 bg-slate-50 rounded border border-slate-100';
         item.innerHTML = `
           <span class="font-semibold text-slate-700">${vndVal.toLocaleString()} ₫</span>
-          <span class="theme-color font-bold">≈ NT$ ${twdVal}</span>
+          <span class="theme-color font-bold">≈ NT$ ${Number(twdVal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
         `;
         table.appendChild(item);
       });
@@ -1013,7 +1014,7 @@
 
 
     /***************************************************
-     * 9. TAB 4: 記帳預算與分類篩選邏輯
+     * 9. TAB 4: 記帳預算與分類篩選邏輯 (精確計算到小數後兩位)
      ***************************************************/
     function renderBudget() {
       // 1. 渲染「新增消費」的分類選取鈕 (在表單內)
@@ -1044,7 +1045,7 @@
         catSelector.appendChild(btn);
       });
 
-      // 2. 🌟 渲染「明細表篩選分類列」(橫向滾動)
+      // 2. 渲染「明細表篩選分類列」(橫向滾動)
       const filterSelector = document.getElementById('budget-filter-selector');
       filterSelector.innerHTML = '';
       
@@ -1072,7 +1073,7 @@
         filterSelector.appendChild(btn);
       });
 
-      // 3. 計算總支出 (不分分類，頂部卡片專用)
+      // 3. 計算總支出 (保留小數點後兩位)
       const totalTwd = budgetList.reduce((acc, curr) => {
         if (curr.currency === 'TWD') {
           return acc + curr.amount;
@@ -1080,9 +1081,9 @@
           return acc + (curr.amount / exchangeRate);
         }
       }, 0);
-      document.getElementById('total-budget-text').innerText = `NT$ ${Math.round(totalTwd).toLocaleString()}`;
+      document.getElementById('total-budget-text').innerText = `NT$ ${totalTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-      // 4. 🌟 依分類篩選預算明細並計算小計
+      // 4. 依分類篩選預算明細並計算小計 (保留小數點後兩位)
       const filteredList = budgetFilterCategory === '全部'
         ? budgetList
         : budgetList.filter(item => item.category === budgetFilterCategory);
@@ -1095,9 +1096,9 @@
         }
       }, 0);
 
-      // 更新篩選小計文字
+      // 更新篩選小計文字 (精確度至第二位)
       const subtotalLabel = budgetFilterCategory === '全部' ? '總花費' : `${budgetFilterCategory}小計`;
-      document.getElementById('budget-filter-subtotal').innerText = `${subtotalLabel}: NT$ ${Math.round(filteredTwd).toLocaleString()}`;
+      document.getElementById('budget-filter-subtotal').innerText = `${subtotalLabel}: NT$ ${filteredTwd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
       // 5. 渲染明細清單
       const listContainer = document.getElementById('budget-list-container');
@@ -1115,8 +1116,9 @@
         const div = document.createElement('div');
         div.className = 'flex justify-between items-center p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs border border-slate-100 transition-colors duration-150';
         
+        // 明細估算折合台幣支援小數後二位顯示
         const estTwd = item.currency === 'VND' 
-          ? `約折合 NT$ ${Math.round(item.amount / exchangeRate)}` 
+          ? `約折合 NT$ ${(item.amount / exchangeRate).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}` 
           : '台幣直接計價';
 
         div.innerHTML = `
@@ -1131,7 +1133,7 @@
           </div>
           <div class="flex items-center space-x-2">
             <span class="font-extrabold text-slate-800">
-              ${item.currency === 'TWD' ? 'NT$' : '₫'} ${item.amount.toLocaleString()}
+              ${item.currency === 'TWD' ? 'NT$' : '₫'} ${item.amount.toLocaleString(undefined, {minimumFractionDigits: item.currency === 'TWD' ? 2 : 0})}
             </span>
             <button onclick="deleteBudgetItem('${item.id}')" class="text-slate-300 hover:text-red-500 p-1 active:scale-90 transition-transform">
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
@@ -1189,15 +1191,15 @@
         }
       };
 
-      // 2. 自訂匯率輸入框
+      // 2. 自訂匯率輸入框 (支援精確小數浮點數讀取)
       document.getElementById('rate-input').oninput = function(e) {
         const val = parseFloat(e.target.value);
         if (val && val > 0) {
           exchangeRate = val;
           localStorage.setItem('danang_exchange_rate', exchangeRate);
-          document.getElementById('current-rate-text').innerText = exchangeRate;
+          document.getElementById('current-rate-text').innerText = exchangeRate.toFixed(2);
           
-          // 重新換算當前台幣輸入值
+          // 重新換算當前台幣與越南盾輸入值
           const twdVal = document.getElementById('twd-input').value;
           handleTwdChange(twdVal);
           
